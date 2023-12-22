@@ -2,13 +2,13 @@ const { json } = require('body-parser');
 const { poolPromise } = require('../util/db');
 const { sql } = require('../util/db');
 
-async function findItem(id) {
-	var p_input_json = `[{"item_id": "${id}"}]`
+async function findModel(id) {
+	var p_input_json = `[{"id": "${id}"}]`
 
 	const pool = await poolPromise
 	const result = await pool.request()
 		.input('p_input_json', sql.NVarChar(sql.MAX), p_input_json)
-		.execute('COLLECTION.r_OS_EXPLORER')
+		.execute('GRLS.r_model')
 
 	return result.recordsets[0];
 
@@ -40,11 +40,10 @@ module.exports = class OSMap {
 	}
 
 	static async fetchAll() {
-		return findItem(-1);
+		return findModel(-1);
 	}
 
 	static async findById(id) {
-		return findItem(id);
+		return findModel(id);
 	}
-
 };

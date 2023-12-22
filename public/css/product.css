@@ -1,0 +1,38 @@
+.map-form {
+    width: 20rem;
+    max-width: 90%;
+    margin: auto;
+    display: block;
+}
+
+.map-item {
+    width: 20rem;
+    max-width: 20%;
+    margin: 1rem;
+}
+
+.map__title {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.map__image {
+    width: 100%;
+    text-align: center;
+}
+
+.map__image img {
+    height: 25% ;
+    width: 25%;
+}
+  
+.map__number {
+    text-align: center;
+    color: #4d4d4d;
+    margin-bottom: 0.5rem;
+}
+
+.map__settlements,
+.map__publishdate {
+    text-align: center;
+}

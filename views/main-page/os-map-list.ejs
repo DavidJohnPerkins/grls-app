@@ -1,0 +1,43 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+
+            <main>
+                <% if (items.length > 0) { %>
+                    <div class="grid">
+                        <% for (let item of items) { %>
+                            <article class="card map-item">
+                                <header class="map__header">
+                                    <h1 class="map__title">
+                                        <%= item.map_title %>
+                                    </h1>
+                                </header>
+                                <div class="map__image">
+                                    <img src="<%= item.map_image %>" alt="<%= item.map_title %>">
+                                </div>
+                                <div class="card__content">
+                                    <h2 class="map__number">$
+                                        <%= item.map_number %>
+                                    </h2>
+                                    <p class="map__settlements">
+                                        <%= item.main_settlements %>
+                                    </p>
+                                    <p class="map__publishdate">
+                                        <%= item.publish_date %>
+                                    </p>
+                                </div>
+                                <div class="card__actions">
+                                    <a href="/products/<%= item.item_id %>" class="btn">Details</a>
+                                    <%- include('../includes/add-to-cart.ejs', {item: item}) %>
+                                </div>
+                            </article>
+                            <% } %>
+                    </div>
+                    <% } else { %>
+                        <h1>No Maps Found</h1>
+                        <% } %>
+            </main>
+            <%- include('../includes/end.ejs') %>

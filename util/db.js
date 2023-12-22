@@ -20,7 +20,3 @@ const poolPromise = new sql.ConnectionPool(config)
 module.exports = {
   sql, poolPromise
 }
-
-//export const poolPromise = _poolPromise;
-//export const mssql = sql;
-//module.exports e = _poolPromise;

@@ -7,7 +7,7 @@ exports.getModel = (req, res, next) => {
 			res.render('main-page/model-detail', {
 				model: model,
 				pageTitle: model.principal_name,
-				path: '/model'
+				path: '/'
 			});
 		})
     	.catch(err => console.log(err));

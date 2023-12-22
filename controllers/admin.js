@@ -1,5 +1,6 @@
-const Product = require('../models/os_map');
+const Product = require('../models/sql-grlsdb');
 
+/*
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
     pageTitle: 'Add Product',
@@ -73,3 +74,4 @@ exports.postDeleteProduct = (req, res, next) => {
   Product.deleteById(prodId);
   res.redirect('/admin/products');
 };
+*/

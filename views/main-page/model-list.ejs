@@ -6,38 +6,37 @@
         <%- include('../includes/navigation.ejs') %>
 
             <main>
-                <% if (items.length > 0) { %>
+                <% if (models.length > 0) { %>
                     <div class="grid">
-                        <% for (let item of items) { %>
-                            <article class="card map-item">
-                                <header class="map__header">
-                                    <h1 class="map__title">
-                                        <%= item.map_title %>
+                        <% for (let model of models) { %>
+                            <article class="card model-item">
+                                <header class="card__header">
+                                    <h1 class="model__name">
+                                        <%= model.principal_name %>
                                     </h1>
                                 </header>
-                                <div class="map__image">
-                                    <img src="<%= item.map_image %>" alt="<%= item.map_title %>">
+                                <div class="model__image">
+                                    <img src="<%= model.image_url %>" alt="<%= model.principal_name %>">
                                 </div>
                                 <div class="card__content">
-                                    <h2 class="map__number">$
-                                        <%= item.map_number %>
+                                    <h2 class="model__hq">
+                                        <%= model.hotness_quotient %>
                                     </h2>
-                                    <p class="map__settlements">
-                                        <%= item.main_settlements %>
+                                    <p class="model__nationality">
+                                        <%= model.nationality %>
                                     </p>
-                                    <p class="map__publishdate">
-                                        <%= item.publish_date %>
+                                    <p class="model__yob">
+                                        <%= model.year_of_birth %>
                                     </p>
                                 </div>
                                 <div class="card__actions">
-                                    <a href="/products/<%= item.item_id %>" class="btn">Details</a>
-                                    <%- include('../includes/add-to-cart.ejs', {item: item}) %>
+                                    <a href="/model/<%= model.id %>" class="btn">Details</a>
                                 </div>
                             </article>
                             <% } %>
                     </div>
                     <% } else { %>
-                        <h1>No Maps Found</h1>
+                        <h1>No Models Found</h1>
                         <% } %>
             </main>
             <%- include('../includes/end.ejs') %>

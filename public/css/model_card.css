@@ -1,38 +1,33 @@
-.map-form {
+.model-form {
     width: 20rem;
     max-width: 90%;
     margin: auto;
     display: block;
 }
 
-.map-item {
+.model-item {
     width: 20rem;
     max-width: 20%;
     margin: 1rem;
 }
 
-.map__title {
+.model__name {
     font-size: 1.2rem;
     text-align: center;
 }
 
-.map__image {
+.model__image {
     width: 100%;
     text-align: center;
 }
 
-.map__image img {
-    height: 25% ;
-    width: 25%;
-}
-  
-.map__number {
-    text-align: center;
-    color: #4d4d4d;
-    margin-bottom: 0.5rem;
+.model__image img {
+    height: 240px ;
+    width: 240px;
 }
 
-.map__settlements,
-.map__publishdate {
+.model__hq,
+.model__nationality,
+.model__yob {
     text-align: center;
 }

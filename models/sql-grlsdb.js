@@ -3,7 +3,7 @@ const { poolPromise } = require('../util/db');
 const { sql } = require('../util/db');
 
 async function findModel(id) {
-	var p_input_json = `[{"id": "${id}"}]`
+	var p_input_json = `{"model_id": "${id}"}`
 
 	const pool = await poolPromise
 	const result = await pool.request()
@@ -14,8 +14,9 @@ async function findModel(id) {
 
 }
 
-module.exports = class OSMap {
+module.exports = class Model {
 
+/*
 	constructor(id, title, imageUrl, description, price) {
 		this.item_id = item_id;
 		this.key_value = key_value;
@@ -25,7 +26,7 @@ module.exports = class OSMap {
 		this.publish_date = publish_date;
 		this.map_image = map_image;
 	}
-
+*/
 	save() {
 		/*
 		return db.execute(

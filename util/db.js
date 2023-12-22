@@ -4,7 +4,7 @@ var config = {
     server: 'localhost',
     user: 'sa',
     password: 'D04v03tD',
-    database: 'Collections',
+    database: 'TestDB',
     trustServerCertificate: true
 }
 

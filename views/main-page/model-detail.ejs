@@ -4,13 +4,12 @@
     <body>
         <%- include('../includes/navigation.ejs') %>
         <main class="centered">
-            <h1><%= item.map_title %></h1>
+            <h1><%= model.principal_name %></h1>
             <hr>
             <div>
-                <img src="<%= item.map_image %>" alt="<%= item.map_title %>">
+                <img src="<%= model.image_url %>" alt="<%= model.principal_name %>">
             </div>
-            <h2><%= item.main_settlements %></h2>
-            <p><%= item.publish_date %></p>
-            <%- include('../includes/add-to-cart.ejs') %>
+            <h2><%= model.comment %></h2>
+            <p><%= model.aliases %></p>
         </main>
         <%- include('../includes/end.ejs') %>

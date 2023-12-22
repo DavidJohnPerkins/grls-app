@@ -5,7 +5,7 @@ exports.getModel = (req, res, next) => {
 	Grls.findById(modelId)
 		.then(([model]) => {
 			res.render('main-page/model-detail', {
-				item: model,
+				model: model,
 				pageTitle: model.principal_name,
 				path: '/model'
 			});
@@ -17,7 +17,7 @@ exports.getIndex = (req, res, next) => {
 	Grls.fetchAll()
 		.then((rows) => {
 			res.render('main-page/model-list', {
-				items: rows,
+				models: rows,
 				pageTitle: 'Model List',
 				path: '/'
 			});

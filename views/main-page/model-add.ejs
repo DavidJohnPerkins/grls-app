@@ -11,17 +11,15 @@
 				<h1 class="text-center text-primary mt-3 mb-3">Start of model addition</h1>
 
 				<div class="card">
-					<div class="card-header">Nationality</div>
-					<div class="card-body">
-						<div class="mb-3">
+					<div class="card__header">Nationality</div>
+					<div class="card__content">
 							<select name="nationality" id="nationality" class="form-control">
 								<option value="">Select Nationality</option>
-								<% for(var count = 0; count < attr_list.length; count++) { %>
+								<% for(var count = 0; count < natn_list.length; count++) { %>
 
-									<option value="<%= attr_list[count].l2_desc %>"><%= attr_list[count].l2_desc %></option>
+									<option value="<%= natn_list[count].l2_desc %>"><%= natn_list[count].l2_desc %></option>
 								<% } %>
 							</select>
-						</div>
 					</div>
 				</div>
 			</div>

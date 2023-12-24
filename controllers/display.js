@@ -4,7 +4,7 @@ exports.addModel = (req, res, next) => {
 	Grls.getAttributeList('NATN')
 		.then((rows) => {
 			res.render('main-page/model-add', {
-				attr_list: rows,
+				natn_list: rows,
 				pageTitle: 'Add Model',
 				path: '/add-model'
 			});

@@ -1,0 +1,29 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/forms.css">
+</head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+
+		<main>
+			<div class="container">
+				<h1 class="text-center text-primary mt-3 mb-3">Start of model addition</h1>
+
+				<div class="card">
+					<div class="card-header">Nationality</div>
+					<div class="card-body">
+						<div class="mb-3">
+							<select name="nationality" id="nationality" class="form-control">
+								<option value="">Select Nationality</option>
+								<% for(var count = 0; count < attr_list.length; count++) { %>
+
+									<option value="<%= attr_list[count].l2_desc %>"><%= attr_list[count].l2_desc %></option>
+								<% } %>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+            <%- include('../includes/end.ejs') %>

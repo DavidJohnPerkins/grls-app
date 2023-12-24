@@ -11,7 +11,17 @@ async function findModel(id) {
 		.execute('GRLS.r_model')
 
 	return result.recordsets[0];
+}
 
+async function getAttributeList(abbrev) {
+	var p_input_json = `{"abbrev": "${abbrev}"}`
+
+	const pool = await poolPromise
+	const result = await pool.request()
+		.input('p_input_json', sql.NVarChar(sql.MAX), p_input_json)
+		.execute('GRLS.r_attribute_list')
+
+	return result.recordsets[0];
 }
 
 module.exports = class Model {
@@ -46,5 +56,9 @@ module.exports = class Model {
 
 	static async findById(id) {
 		return findModel(id);
+	}
+
+	static async getAttributeList(abbrev) {
+		return getAttributeList(abbrev);
 	}
 };

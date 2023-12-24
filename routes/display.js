@@ -9,6 +9,8 @@ const router = express.Router();
 
 router.get('/', displayController.getIndex);
 
+router.get('/add-model', displayController.addModel);
+
 router.get('/model/:modelId', displayController.getModel);
 
 module.exports = router;

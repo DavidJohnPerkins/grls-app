@@ -11,13 +11,15 @@
 }
 
 .form-control input,
+.form-control option,
 .form-control textarea {
-  border: 1px solid #a1a1a1;
+  border: 1px solid #7f1b1b;
   font: inherit;
   border-radius: 2px;
 }
 
 .form-control input:focus,
+.form-control option:focus,
 .form-control textarea:focus {
-  outline-color: #00695c;
+  outline-color: #442a9f;
 }

@@ -10,8 +10,11 @@
   margin-bottom: 0.25rem;
 }
 
+.form-control select {
+  background-color: aqua;
+}
+
 .form-control input,
-.form-control select,
 .form-control textarea {
   border: 1px solid #7f1b1b;
   font: inherit;
@@ -19,7 +22,6 @@
 }
 
 .form-control input:focus,
-.form-control select:focus,
 .form-control textarea:focus {
   outline-color: #18a62b;
 }

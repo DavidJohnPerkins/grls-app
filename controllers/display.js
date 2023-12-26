@@ -1,18 +1,6 @@
 const Grls = require('../models/sql-grlsdb');
 
 exports.addModel = (req, res, next) => {
-	Grls.getAttributeList('NATN')
-		.then((rows) => {
-			res.render('main-page/model-add', {
-				natn_list: rows,
-				pageTitle: 'Add Model',
-				path: '/add-model'
-			});
-		})
-    	.catch(err => console.log(err));
-};
-
-exports.addModel2 = (req, res, next) => {
 
 	Promise.all([
 		Grls.getAttributeList('ASHP'),

@@ -1,0 +1,23 @@
+.dropdown__row {
+    display: table;
+    width: 100%; /*Optional*/
+    table-layout: auto; /*Optional*/
+    /*border-spacing: 10px;*/ /*Optional*/
+  }
+  
+.dropdown__row > div {
+    display: table-cell;
+}
+
+.dropdown__row > div > p {
+    margin: 0;
+}
+.add-dropdown {
+    text-align: center;
+}
+
+select {
+    background-color: #00695c;
+    color: #ffeb3b;
+}
+  

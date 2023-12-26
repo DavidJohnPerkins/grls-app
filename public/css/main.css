@@ -145,18 +145,6 @@ form {
   align-items: stretch;
 }
 
-.Row {
-  display: table;
-  width: 100%; /*Optional*/
-  table-layout: fixed; /*Optional*/
-  border-spacing: 10px; /*Optional*/
-}
-
-.Row > div {
-  display: table-cell;
-  background-color: red; /*Optional*/
-}
-
 .card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }

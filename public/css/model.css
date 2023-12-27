@@ -1,5 +1,10 @@
+select {
+    background-color: #00695c;
+    color: #ffeb3b;
+}
+
 .model-form {
-    width: 20rem;
+    /*width: 20rem;*/
     max-width: 90%;
     margin: auto;
     display: block;

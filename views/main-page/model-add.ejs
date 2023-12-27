@@ -1,115 +1,184 @@
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/model_card.css">
-<link rel="stylesheet" href="/css/model_add.css">
+<link rel="stylesheet" href="/css/model.css">
+<link rel="stylesheet" href="/css/forms.css">
 </head>
     <body>
         <%- include('../includes/navigation.ejs') %>
 		<main>
 			<h1 class="centered">Model Addition</h1>
-			<div class="container">
-				<h2>Attributes</h2>
-				<div class="dropdown__row">
-					<div>
+			<form class="model-form" action="/add-model" method="POST">
+				<div class="form-control">
+					<label for="title">Sobriquet</label>
+					<input type="text" name="sobr" id="sobr">
+				</div>
+				<div class="form-control">
+					<label for="imageUrl">Thumbnail URL</label>
+					<input type="text" name="imageUrl" id="imageUrl">
+				</div>
+				<div class="form-control">
+					<label for="price">Hotness Quotient</label>
+					<input type="number" name="hq" id="hq" step="1.0">
+				</div>
+				<div class="form-control">
+					<label for="description">Description</label>
+					<textarea name="description" id="description" rows="5"></textarea>
+				</div>
+				<div class="grid">
+					<article>
 						<p>ASHP</p>
 						<select name="ashp" id="ashp" class="select">
-							<option value="">Arse Shape</option>
 							<% for(var count = 0; count < ashp_list.length; count++) { %>
 								<option value="<%= ashp_list[count].l2_desc %>"><%= ashp_list[count].l2_desc %></option>
 							<% } %>
 						</select>
-					</div>
-					<div>
+					</article>
+					<article>
 						<p>ASIZ</p>
 						<select name="asiz" id="asiz" class="select">
-							<option value="">Arse Size</option>
 							<% for(var count = 0; count < asiz_list.length; count++) { %>
 								<option value="<%= asiz_list[count].l2_desc %>"><%= asiz_list[count].l2_desc %></option>
 							<% } %>
 						</select>
-					</div>
-					<div>
+					</article>
+					<article>
 						<p>ATTR</p>
 						<select name="attr" id="attr" class="select">
-							<option value="">Attractiveness</option>
 							<% for(var count = 0; count < attr_list.length; count++) { %>
 								<option value="<%= attr_list[count].l2_desc %>"><%= attr_list[count].l2_desc %></option>
 							<% } %>
 						</select>
-					</div>
-					<div>
+					</article>
+					<article>
 						<p>BILD</p>
 						<select name="bild" id="bild" class="select">
-							<option value="">Build</option>
 							<% for(var count = 0; count < bild_list.length; count++) { %>
 								<option value="<%= bild_list[count].l2_desc %>"><%= bild_list[count].l2_desc %></option>
 							<% } %>
 						</select>
-					</div>
-					<div>
+					</article>
+					<article>
 						<p>BRDR</p>
 						<select name="brdr" id="brdr" class="select">
-							<option value="">Breast Droop</option>
 							<% for(var count = 0; count < brdr_list.length; count++) { %>
 								<option value="<%= brdr_list[count].l2_desc %>"><%= brdr_list[count].l2_desc %></option>
 							<% } %>
 						</select>
-					</div>
-					<div>
+					</article>
+					<article>
 						<p>BRSH</p>
 						<select name="brsh" id="brsh" class="select">
-							<option value="">Breast Shape</option>
 							<% for(var count = 0; count < brsh_list.length; count++) { %>
 								<option value="<%= brsh_list[count].l2_desc %>"><%= brsh_list[count].l2_desc %></option>
 							<% } %>
 						</select>
-					</div>
-					<div>
+					</article>
+					<article>
 						<p>BSIZ</p>
 						<select name="bsiz" id="bsiz" class="select">
-							<option value="">Breast Size</option>
 							<% for(var count = 0; count < bsiz_list.length; count++) { %>
 								<option value="<%= bsiz_list[count].l2_desc %>"><%= bsiz_list[count].l2_desc %></option>
 							<% } %>
 						</select>
-					</div>
-					<div>
+					</article>
+					<article>
 						<p>CMPX</p>
 						<select name="cmpx" id="cmpx" class="select">
-							<option value="">Complexion</option>
 							<% for(var count = 0; count < cmpx_list.length; count++) { %>
 								<option value="<%= cmpx_list[count].l2_desc %>"><%= cmpx_list[count].l2_desc %></option>
 							<% } %>
 						</select>
-					</div>
-					<div class="Column">
+					</article>
+					<article>
+						<p>ETHN</p>
+						<select name="ethn" id="ethn" class="select">
+							<% for(var count = 0; count < ethn_list.length; count++) { %>
+								<option value="<%= ethn_list[count].l2_desc %>"><%= ethn_list[count].l2_desc %></option>
+							<% } %>
+						</select>
+					</article>
+					<article>
 						<p>EYES</p>
 						<select name="eyes" id="eyes" class="select">
-							<option value="">Eyes</option>
 							<% for(var count = 0; count < eyes_list.length; count++) { %>
 								<option value="<%= eyes_list[count].l2_desc %>"><%= eyes_list[count].l2_desc %></option>
 							<% } %>
 						</select>
-					</div>
-					<div>
+					</article>
+					<article>
 						<p>HAIR</p>
 						<select name="hair" id="hair" class="select">
-							<option value="">Hair</option>
 							<% for(var count = 0; count < hair_list.length; count++) { %>
 								<option value="<%= hair_list[count].l2_desc %>"><%= hair_list[count].l2_desc %></option>
 							<% } %>
 						</select>
-					</div>
-					<div>
+					</article>
+					<article>
+						<p>MONS</p>
+						<select name="mons" id="mons" class="select">
+							<% for(var count = 0; count < mons_list.length; count++) { %>
+								<option value="<%= mons_list[count].l2_desc %>"><%= mons_list[count].l2_desc %></option>
+							<% } %>
+						</select>
+					</article>
+					<article>
 						<p>NATN</p>
 						<select name="natn" id="natn" class="select">
-							<option value="">Nationality</option>
 							<% for(var count = 0; count < natn_list.length; count++) { %>
 								<option value="<%= natn_list[count].l2_desc %>"><%= natn_list[count].l2_desc %></option>
 							<% } %>
 						</select>
-					</div>
+					</article>
+					<article>
+						<p>NPCL</p>
+						<select name="npcl" id="npcl" class="select">
+							<% for(var count = 0; count < npcl_list.length; count++) { %>
+								<option value="<%= npcl_list[count].l2_desc %>"><%= npcl_list[count].l2_desc %></option>
+							<% } %>
+						</select>
+					</article>
+					<article>
+						<p>NPPF</p>
+						<select name="nppf" id="nppf" class="select">
+							<% for(var count = 0; count < nppf_list.length; count++) { %>
+								<option value="<%= nppf_list[count].l2_desc %>"><%= nppf_list[count].l2_desc %></option>
+							<% } %>
+						</select>
+					</article>
+					<article>
+						<p>NPSH</p>
+						<select name="npsh" id="npsh" class="select">
+							<% for(var count = 0; count < npsh_list.length; count++) { %>
+								<option value="<%= npsh_list[count].l2_desc %>"><%= npsh_list[count].l2_desc %></option>
+							<% } %>
+						</select>
+					</article>
+					<article>
+						<p>NPSZ</p>
+						<select name="npsz" id="npsz" class="select">
+							<% for(var count = 0; count < npsz_list.length; count++) { %>
+								<option value="<%= npsz_list[count].l2_desc %>"><%= npsz_list[count].l2_desc %></option>
+							<% } %>
+						</select>
+					</article>
+					<article>
+						<p>PUAT</p>
+						<select name="puat" id="puat" class="select">
+							<% for(var count = 0; count < puat_list.length; count++) { %>
+								<option value="<%= puat_list[count].l2_desc %>"><%= puat_list[count].l2_desc %></option>
+							<% } %>
+						</select>
+					</article>
+					<article>
+						<p>YTHF</p>
+						<select name="ythf" id="ythf" class="select">
+							<% for(var count = 0; count < ythf_list.length; count++) { %>
+								<option value="<%= ythf_list[count].l2_desc %>"><%= ythf_list[count].l2_desc %></option>
+							<% } %>
+						</select>
+					</article>
 				</div>
-			</div>
+				<button class="btn" type="submit">Add Model</button>
+			</form>
 		</main>
             <%- include('../includes/end.ejs') %>

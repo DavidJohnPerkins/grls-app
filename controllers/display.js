@@ -11,9 +11,17 @@ exports.addModel = (req, res, next) => {
 		Grls.getAttributeList('BRSH'),
 		Grls.getAttributeList('BSIZ'),
 		Grls.getAttributeList('CMPX'),
+		Grls.getAttributeList('ETHN'),
 		Grls.getAttributeList('EYES'),
 		Grls.getAttributeList('HAIR'),
-		Grls.getAttributeList('NATN')
+		Grls.getAttributeList('MONS'),
+		Grls.getAttributeList('NATN'),
+		Grls.getAttributeList('NPCL'),
+		Grls.getAttributeList('NPPF'),
+		Grls.getAttributeList('NPSH'),
+		Grls.getAttributeList('NPSZ'),
+		Grls.getAttributeList('PUAT'),
+		Grls.getAttributeList('YTHF'),
 	])
 	.then((arr) => {
 		res.render('main-page/model-add', {
@@ -25,9 +33,17 @@ exports.addModel = (req, res, next) => {
 			brsh_list: arr[5],
 			bsiz_list: arr[6],
 			cmpx_list: arr[7],
-			eyes_list: arr[8],
-			hair_list: arr[9],
-			natn_list: arr[10],
+			ethn_list: arr[8],
+			eyes_list: arr[9],
+			hair_list: arr[10],
+			mons_list: arr[11],
+			natn_list: arr[12],
+			npcl_list: arr[13],
+			nppf_list: arr[14],
+			npsh_list: arr[15],
+			npsz_list: arr[16],
+			puat_list: arr[17],
+			ythf_list: arr[18],
 			pageTitle: 'Add Model',
 			path: '/add-model'
 		});

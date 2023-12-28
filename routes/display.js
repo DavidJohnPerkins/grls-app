@@ -9,7 +9,8 @@ const router = express.Router();
 
 router.get('/', displayController.getIndex);
 
-router.get('/add-model', displayController.addModel);
+router.get('/add-model', displayController.getAddModel);
+router.post('/add-model', displayController.postAddModel)
 
 router.get('/model/:modelId', displayController.getModel);
 

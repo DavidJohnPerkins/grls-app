@@ -1,6 +1,6 @@
 const Grls = require('../models/sql-grlsdb');
 
-exports.addModel = (req, res, next) => {
+exports.getAddModel = (req, res, next) => {
 
 	Promise.all([
 		Grls.getAttributeList('ASHP'),
@@ -51,6 +51,9 @@ exports.addModel = (req, res, next) => {
 	.catch(err => console.log(err));
 }
 
+exports.postAddModel = (req, res, next) => {
+	console.log('Adding model');
+}
 
 exports.getIndex = (req, res, next) => {
 	Grls.fetchAll()

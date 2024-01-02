@@ -22,6 +22,7 @@ exports.getAddModel = (req, res, next) => {
 		Grls.getAttributeList('NPSZ'),
 		Grls.getAttributeList('PUAT'),
 		Grls.getAttributeList('YTHF'),
+		Grls.getFlagList()
 	])
 	.then((arr) => {
 		res.render('main-page/model-add', {
@@ -44,6 +45,7 @@ exports.getAddModel = (req, res, next) => {
 			npsz_list: arr[16],
 			puat_list: arr[17],
 			ythf_list: arr[18],
+			flag_list: arr[19],
 			pageTitle: 'Add Model',
 			path: '/add-model'
 		});

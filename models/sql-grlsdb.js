@@ -19,8 +19,16 @@ async function getAttributeList(abbrev) {
 	const pool = await poolPromise
 	const result = await pool.request()
 		.input('p_input_json', sql.NVarChar(sql.MAX), p_input_json)
-		.execute('GRLS.r_attribute_list')
+		.execute('GRLS.r_l2_attribute_list')
 
+	return result.recordsets[0];
+}
+
+async function getFlagList() {
+	const pool = await poolPromise
+	const result = await pool.request()
+		.execute('GRLS.r_flag_list')
+	
 	return result.recordsets[0];
 }
 
@@ -60,5 +68,9 @@ module.exports = class Model {
 
 	static async getAttributeList(abbrev) {
 		return getAttributeList(abbrev);
+	}
+
+	static async getFlagList() {
+		return getFlagList();
 	}
 };

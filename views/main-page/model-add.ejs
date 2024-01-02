@@ -178,6 +178,15 @@
 						</select>
 					</article>
 				</div>
+				<p>Flags</p>
+				<div class="grid">
+					<% for(var count = 0; count < flag_list.length; count++) { %>
+						<article>
+							<label><%= flag_list[count].flag_abbrev %></label>
+							<input type="checkbox" name="<%= flag_list[count].flag_abbrev %>" id="<%= flag_list[count].flag_abbrev %>" value="false">
+						</article>						
+					<% } %>
+				</div>
 				<button class="btn" type="submit">Add Model</button>
 			</form>
 		</main>

@@ -69,7 +69,7 @@ exports.getIndex = (req, res, next) => {
     	.catch(err => console.log(err));
 };
 
-exports.getModel = (req, res, next) => {
+exports.getModelByID = (req, res, next) => {
 	const modelId = req.params.modelId;
 	Grls.findById(modelId)
 		.then(([model]) => {

@@ -12,6 +12,6 @@ router.get('/', displayController.getIndex);
 router.get('/add-model', displayController.getAddModel);
 router.post('/add-model', displayController.postAddModel)
 
-router.get('/model/:modelId', displayController.getModel);
+router.get('/model/:modelId', displayController.getModelByID);
 
 module.exports = router;

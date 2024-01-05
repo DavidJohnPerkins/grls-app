@@ -3,41 +3,41 @@
 <link rel="stylesheet" href="/css/model.css">
 </head>
 
-    <body>
-        <%- include('../includes/navigation.ejs') %>
+	<body>
+		<%- include('../includes/navigation.ejs') %>
 
-            <main>
-                <% if (models.length > 0) { %>
-                    <div class="grid">
-                        <% for (let model of models) { %>
-                            <article class="card model-item">
-                                <header class="card__header">
-                                    <h1 class="model__name">
-                                        <%= model.principal_name %>
-                                    </h1>
-                                </header>
-                                <div class="model__image">
-                                    <img src="<%= model.image_url %>" alt="<%= model.principal_name %>">
-                                </div>
-                                <div class="card__content">
-                                    <h2 class="model__hq">
-                                        <%= model.hotness_quotient %>
-                                    </h2>
-                                    <p class="model__nationality">
-                                        <%= model.nationality %>
-                                    </p>
-                                    <p class="model__yob">
-                                        <%= model.year_of_birth %>
-                                    </p>
-                                </div>
-                                <div class="card__actions">
-                                    <a href="/model/<%= model.id %>" class="btn">Details</a>
-                                </div>
-                            </article>
-                            <% } %>
-                    </div>
-                    <% } else { %>
-                        <h1>No Models Found</h1>
-                        <% } %>
-            </main>
-            <%- include('../includes/end.ejs') %>
+		<main>
+			<% if (models.length > 0) { %>
+				<div class="grid">
+					<% for (let model of models) { %>
+						<article class="card model-item">
+							<header class="card__header">
+								<h1 class="model__name">
+									<%= model.principal_name %>
+								</h1>
+							</header>
+							<div class="model__image">
+								<img src="<%= model.image_url %>" alt="<%= model.principal_name %>">
+							</div>
+							<div class="card__content">
+								<h2 class="model__hq">
+									<%= model.hotness_quotient %>
+								</h2>
+								<p class="model__nationality">
+									<%= model.nationality %>
+								</p>
+								<p class="model__yob">
+									<%= model.year_of_birth %>
+								</p>
+							</div>
+							<div class="card__actions">
+								<a href="/model/<%= model.id %>" class="btn">Details</a>
+							</div>
+						</article>
+					<% } %>
+				</div>
+			<% } else { %>
+				<h1>No Models Found</h1>
+			<% } %>
+		</main>
+		<%- include('../includes/end.ejs') %>

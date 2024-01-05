@@ -5,11 +5,16 @@
         <%- include('../includes/navigation.ejs') %>
         <main class="centered">
             <h1><%= model.principal_name %></h1>
+			<% if (model.aliases != null) { %>
+                <p>Also known as: <%= model.aliases %></p>
+            <% } else { %>
+                <p>No Aliases<p>
+            <% } %>
             <hr>
             <div>
                 <img src="<%= model.image_url %>" alt="<%= model.principal_name %>">
             </div>
             <h2><%= model.comment %></h2>
-            <p><%= model.aliases %></p>
+   
         </main>
         <%- include('../includes/end.ejs') %>

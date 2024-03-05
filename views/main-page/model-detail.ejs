@@ -11,41 +11,31 @@
             <% } else { %>
                 <p>No Aliases<p>
             <% } %>
+            <h2><%= model.comment %></h2>
             <hr>
             <div class="parent">
-                <div class="child">
-                    <div class="grid">
-                        <article class="card model-item-2">
-                            <div class="model__detail__image">
-                                <img src="<%= model.FA_url %>" alt="<%= model.principal_name %>">
-                            </div>
-                        </article>
-                        <article class="card model-item-2">
-                            <div class="model__detail__image">
-                                <img src="<%= model.BR_url %>" alt="<%= model.principal_name %>">
-                            </div>
-                        </article>
-                        <article class="card model-item-2">
-                            <div class="model__detail__image">
-                                <img src="<%= model.PF_url %>" alt="<%= model.principal_name %>">
-                            </div>
-                        </article>
-                        <article class="card model-item-2">
-                            <div class="model__detail__image">
-                                <img src="<%= model.PR_url %>" alt="<%= model.principal_name %>">
-                            </div>
-                        </article>
-                        <article class="card model-item-2"  >
-                            <div class="model__detail__image">
-                                <img src="<%= model.AR_url %>" alt="<%= model.principal_name %>">
-                            </div>
-                        </article>
+                <div class="child child__left">
+                    <div class="model__detail__image">
+                        <img src="<%= model.FA_url %>" alt="<%= model.principal_name %>">
+                    </div>
+                    <div class="model__detail__image">
+                        <img src="<%= model.BR_url %>" alt="<%= model.principal_name %>">
+                    </div>
+                    <div class="model__detail__image">
+                        <img src="<%= model.PF_url %>" alt="<%= model.principal_name %>">
+                    </div>
+                    <div class="model__detail__image">
+                        <img src="<%= model.PR_url %>" alt="<%= model.principal_name %>">
+                    </div>
+                    <div class="model__detail__image">
+                        <img src="<%= model.AR_url %>" alt="<%= model.principal_name %>">
                     </div>
                 </div>
-                <div class="child">
-                    <img src="<%= model.RF_url %>" alt="<%= model.thumbnail %>">
+                <div class="child child__right">
+                    <div class="model__detail__image">
+                        <img src="<%= model.RF_url %>" alt="<%= model.thumbnail %>">
+                    </div>
                 </div>
-            <h2><%= model.comment %></h2>
    
         </main>
         <%- include('../includes/end.ejs') %>

@@ -32,6 +32,17 @@ async function getFlagList() {
 	return result.recordsets[0];
 }
 
+async function getModelCards(id) {
+	var p_input_json = `{"model_id": "${id}"}`
+
+	const pool = await poolPromise
+	const result = await pool.request()
+		.input('p_input_json', sql.NVarChar(sql.MAX), p_input_json)
+		.execute('GRLS.r_model_card_list')
+
+	return result.recordsets[0];
+}
+
 module.exports = class Model {
 
 /*
@@ -58,8 +69,8 @@ module.exports = class Model {
 	static deleteById(id) {	
 	}
 
-	static async fetchAll() {
-		return findModel(-1);
+	static async getModelCards() {
+		return getModelCards(-1);
 	}
 
 	static async findById(id) {

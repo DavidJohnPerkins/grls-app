@@ -58,7 +58,7 @@ exports.postAddModel = (req, res, next) => {
 }
 
 exports.getIndex = (req, res, next) => {
-	Grls.fetchAll()
+	Grls.getModelCards()
 		.then((rows) => {
 			res.render('main-page/model-list', {
 				models: rows,

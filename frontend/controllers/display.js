@@ -1,5 +1,4 @@
-const Grls = require('../models/sql-grlsdb');
-
+/*
 exports.getAddModel = (req, res, next) => {
 
 	Promise.all([
@@ -52,13 +51,20 @@ exports.getAddModel = (req, res, next) => {
 	})
 	.catch(err => console.log(err));
 }
-
+//
 exports.postAddModel = (req, res, next) => {
 	console.log('Adding model');
 }
+*/
+
+async function getData(url) {
+	const response = await fetch(url);
+    const body = await response.json();
+	return body;
+};
 
 exports.getIndex = (req, res, next) => {
-	Grls.getModelCards()
+	getData('http://localhost:8080/')
 		.then((rows) => {
 			res.render('main-page/model-list', {
 				models: rows,
@@ -69,9 +75,10 @@ exports.getIndex = (req, res, next) => {
     	.catch(err => console.log(err));
 };
 
+
 exports.getModelByID = (req, res, next) => {
 	const modelId = req.params.modelId;
-	Grls.findById(modelId)
+	getData(`http://localhost:8080/model/${modelId}`)
 		.then(([model]) => {
 			res.render('main-page/model-detail', {
 				model: model,
@@ -81,3 +88,4 @@ exports.getModelByID = (req, res, next) => {
 		})
     	.catch(err => console.log(err));
 };
+

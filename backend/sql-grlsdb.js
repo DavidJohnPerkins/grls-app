@@ -1,6 +1,6 @@
 const { json } = require('body-parser');
-const { poolPromise } = require('../util/db');
-const { sql } = require('../util/db');
+const { poolPromise } = require('./db');
+const { sql } = require('./db');
 
 async function findModel(id) {
 	var p_input_json = `{"model_id": "${id}"}`
@@ -38,7 +38,7 @@ async function getModelCards(id) {
 	const pool = await poolPromise
 	const result = await pool.request()
 		.input('p_input_json', sql.NVarChar(sql.MAX), p_input_json)
-		.execute('GRLS.r_model_card_list')
+		.execute('GRLS.r_model')
 
 	return result.recordsets[0];
 }

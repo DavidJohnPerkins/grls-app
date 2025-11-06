@@ -18,7 +18,23 @@ app.get('/model/:modelId', async (req, res) => {
 	const modelId = req.params.modelId;
 	grls.findById(modelId)
 	.then((rows) => {
-		console.log(rows);
+		res.status(200).send(rows);
+	})
+	.catch(err => console.log(err));
+});
+
+app.get('/attributeList/:listCode', async (req, res) => {
+	const listCode = req.params.listCode;
+	grls.getAttributeList(listCode)
+	.then((rows) => {
+		res.status(200).send(rows);
+	})
+	.catch(err => console.log(err));
+});
+
+app.get('/flagList', async (req, res) => {
+	grls.getFlagList()
+	.then((rows) => {
 		res.status(200).send(rows);
 	})
 	.catch(err => console.log(err));

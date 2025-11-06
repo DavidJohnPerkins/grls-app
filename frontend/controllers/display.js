@@ -1,27 +1,25 @@
-/*
 exports.getAddModel = (req, res, next) => {
-
 	Promise.all([
-		Grls.getAttributeList('ASHP'),
-		Grls.getAttributeList('ASIZ'),
-		Grls.getAttributeList('ATTR'),
-		Grls.getAttributeList('BILD'),
-		Grls.getAttributeList('BRDR'),
-		Grls.getAttributeList('BRSH'),
-		Grls.getAttributeList('BSIZ'),
-		Grls.getAttributeList('CMPX'),
-		Grls.getAttributeList('ETHN'),
-		Grls.getAttributeList('EYES'),
-		Grls.getAttributeList('HAIR'),
-		Grls.getAttributeList('MONS'),
-		Grls.getAttributeList('NATN'),
-		Grls.getAttributeList('NPCL'),
-		Grls.getAttributeList('NPPF'),
-		Grls.getAttributeList('NPSH'),
-		Grls.getAttributeList('NPSZ'),
-		Grls.getAttributeList('PUAT'),
-		Grls.getAttributeList('YTHF'),
-		Grls.getFlagList()
+		getData("http://localhost:8080/attributeList/ASHP"),
+		getData("http://localhost:8080/attributeList/ASIZ"),
+		getData("http://localhost:8080/attributeList/ATTR"),
+		getData("http://localhost:8080/attributeList/BILD"),
+		getData("http://localhost:8080/attributeList/BRDR"),
+		getData("http://localhost:8080/attributeList/BRSH"),
+		getData("http://localhost:8080/attributeList/BSIZ"),
+		getData("http://localhost:8080/attributeList/CMPX"),
+		getData("http://localhost:8080/attributeList/ETHN"),
+		getData("http://localhost:8080/attributeList/EYES"),
+		getData("http://localhost:8080/attributeList/HAIR"),
+		getData("http://localhost:8080/attributeList/MONS"),
+		getData("http://localhost:8080/attributeList/NATN"),
+		getData("http://localhost:8080/attributeList/NPCL"),
+		getData("http://localhost:8080/attributeList/NPPF"),
+		getData("http://localhost:8080/attributeList/NPSH"),
+		getData("http://localhost:8080/attributeList/NPSZ"),
+		getData("http://localhost:8080/attributeList/PUAT"),
+		getData("http://localhost:8080/attributeList/YTHF"),
+		getData("http://localhost:8080/flaglist")
 	])
 	.then((arr) => {
 		res.render('main-page/model-add', {
@@ -51,11 +49,10 @@ exports.getAddModel = (req, res, next) => {
 	})
 	.catch(err => console.log(err));
 }
-//
+
 exports.postAddModel = (req, res, next) => {
 	console.log('Adding model');
 }
-*/
 
 async function getData(url) {
 	const response = await fetch(url);
@@ -80,9 +77,11 @@ exports.getModelByID = (req, res, next) => {
 	const modelId = req.params.modelId;
 	getData(`http://localhost:8080/model/${modelId}`)
 		.then(([model]) => {
+			imgPath = model.principal_name.substring(0, 1) + "/" + model.principal_name;
 			res.render('main-page/model-detail', {
 				model: model,
 				pageTitle: model.principal_name,
+				imagePath: imgPath,
 				path: '/'
 			});
 		})

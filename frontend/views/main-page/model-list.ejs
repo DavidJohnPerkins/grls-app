@@ -17,7 +17,7 @@
 								</h1>
 							</header>
 							<div class="model__image">
-								<img src="<%= model.TH_url %>" alt="<%= model.principal_name %>">
+								<img src="thumbnail/<%= model.TH_url %>" alt="<%= model.principal_name %>">
 							</div>
 							<div class="card__content">
 								<h2 class="model__hq">
@@ -32,6 +32,7 @@
 							</div>
 							<div class="card__actions">
 								<a href="/model/<%= model.id %>" class="btn">Details</a>
+								<a href="/images/<%= model.principal_name %>" class="btn">Images</a>
 							</div>
 						</article>
 					<% } %>

@@ -7,7 +7,8 @@ const errorController = require('./controllers/error');
 //const db = require('./util/database');
 
 const app = express();
-//app.use(express.static("public"));
+app.use('/thumbnail', express.static(path.join(__dirname, '../../../../public/thumbnail')));
+app.use('/detail', express.static(path.join(__dirname, '../../../../public/detail')));
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -19,7 +20,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/admin', adminRoutes);
-app.use(displayRoutes);
+app.use('/', displayRoutes);
+app.use('/model/', displayRoutes);
 
 app.use(errorController.get404);
 

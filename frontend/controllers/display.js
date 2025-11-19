@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 exports.getAddModel = (req, res, next) => {
 	Promise.all([
 		getData("http://localhost:8080/attributeList/ASHP"),
@@ -72,7 +74,6 @@ exports.getIndex = (req, res, next) => {
     	.catch(err => console.log(err));
 };
 
-
 exports.getModelByID = (req, res, next) => {
 	const modelId = req.params.modelId;
 	getData(`http://localhost:8080/model/${modelId}`)
@@ -86,5 +87,37 @@ exports.getModelByID = (req, res, next) => {
 			});
 		})
     	.catch(err => console.log(err));
+};
+
+exports.getModelImagesByName = (req, res, next) => {
+	const modelName = req.params.modelName;
+	localPath = "../../../../public/detail/" + modelName.substring(0, 1) + "/" + modelName;
+	imgPath = modelName.substring(0, 1) + "/" + modelName;
+	
+	var photos = [];
+	fs.readdirSync(localPath).forEach(file => {
+		photos.push(file);
+	})
+	console.log(photos);
+	res.render('main-page/model-photo-list', {
+		photos: photos,
+		pageTitle: modelName,
+		imagePath: imgPath,
+		path: '/'
+	});
+
+	/*
+	getData(`http://localhost:8080/model/${modelId}`)
+		.then(([model]) => {
+			imgPath = model.principal_name.substring(0, 1) + "/" + model.principal_name;
+			res.render('main-page/model-detail', {
+				model: model,
+				pageTitle: model.principal_name,
+				imagePath: imgPath,
+				path: '/'
+			});
+		})
+    	.catch(err => console.log(err));
+	*/
 };
 

@@ -7,6 +7,8 @@ const errorController = require('./controllers/error');
 //const db = require('./util/database');
 
 const app = express();
+console.log(__dirname);
+
 app.use('/thumbnail', express.static(path.join(__dirname, '../../../../public/thumbnail')));
 app.use('/detail', express.static(path.join(__dirname, '../../../../public/detail')));
 

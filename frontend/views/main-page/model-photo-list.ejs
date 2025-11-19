@@ -1,0 +1,23 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/model.css">
+</head>
+
+	<body>
+		<%- include('../includes/navigation.ejs') %>
+
+		<main>
+			<div class="photo__grid">
+				<% for (let photo of photos) { %>
+					<article class="card model-item">
+						<div class="photo__small">
+							<img src="/detail/<%= imagePath %>/<%= photo %>" alt="blx<%= photo %>">
+						</div>
+						<div class="photo__actions">
+							<a href="/photo/<%= photo %>" class="btn">View</a>
+						</div>
+					</article>
+				<% } %>
+			</div>
+		</main>
+		<%- include('../includes/end.ejs') %>

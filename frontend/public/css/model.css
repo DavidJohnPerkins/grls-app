@@ -49,3 +49,12 @@ select {
     text-align: center;
     font-size: 0.5rem;
 }
+
+.photo__small {
+    width: 100%;
+    text-align: center;
+}
+
+.photo__small img {
+    height: 360px ;
+}

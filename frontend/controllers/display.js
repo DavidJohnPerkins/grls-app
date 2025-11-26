@@ -95,29 +95,14 @@ exports.getModelImagesByName = (req, res, next) => {
 	imgPath = modelName.substring(0, 1) + "/" + modelName;
 	
 	var photos = [];
-	fs.readdirSync(localPath).forEach(file => {
+	fs.readdirSync(localPath).filter(fn => fn.endsWith('.jpg')).forEach(file => {
 		photos.push(file);
 	})
-	console.log(photos);
 	res.render('main-page/model-photo-list', {
 		photos: photos,
 		pageTitle: modelName,
 		imagePath: imgPath,
 		path: '/'
 	});
-
-	/*
-	getData(`http://localhost:8080/model/${modelId}`)
-		.then(([model]) => {
-			imgPath = model.principal_name.substring(0, 1) + "/" + model.principal_name;
-			res.render('main-page/model-detail', {
-				model: model,
-				pageTitle: model.principal_name,
-				imagePath: imgPath,
-				path: '/'
-			});
-		})
-    	.catch(err => console.log(err));
-	*/
 };
 

@@ -1,31 +1,34 @@
 <div class="backdrop"></div>
 <header class="main-header">
-    <button id="side-menu-toggle">Menu</button>
-    <nav class="main-header__nav">
-        <ul class="main-header__item-list">
-            <li class="main-header__item">
-                <a class="<%= path === '/' ? 'active' : '' %>" href="/">Models</a>
-            </li>
-            <li class="main-header__item">
-                <a class="<%= path === '/add-model' ? 'active' : '' %>" href="/add-model">Add Model</a>
-            </li>
-            <li class="main-header__item">
-                <a class="<%= path === '/admin' ? 'active' : '' %>" href="/admin">Admin</a>
-            </li>
-        </ul>
-    </nav>
+	<button id="side-menu-toggle">Menu</button>
+	<nav class="main-header__nav">
+		<ul class="main-header__item-list">
+			<li class="main-header__item">
+				<a class="<%= path === '/' ? 'active' : '' %>" href="/">Models</a>
+			</li>
+			<li class="main-header__item">
+				<a class="<%= path === '/add-model' ? 'active' : '' %>" href="/add-model">Add Model</a>
+			</li>
+			<li class="main-header__item">
+				<a class="<%= path === '/admin' ? 'active' : '' %>" href="/admin">Admin</a>
+			</li>
+			<li class="main-header__item">
+				<a class="<%= path === '/contact-sheet' ? 'active' : '' %>" href="/contact-sheet">Contact Sheet</a>
+			</li>
+		</ul>
+	</nav>
 </header>
 
 <nav class="mobile-nav">
-    <ul class="mobile-nav__item-list">
-        <li class="mobile-nav__item">
-            <a class="<%= path === '/' ? 'active' : '' %>" href="/">Models</a>
-        </li>
-        <li class="mobile-nav__item">
-            <a class="<%= path === '/admin/add-model' ? 'active' : '' %>" href="/admin/add-model">Add Model</a>
-        </li>
-        <li class="mobile-nav__item">
-            <a class="<%= path === '/admin' ? 'active' : '' %>" href="/admin">Admin</a>
-        </li>
-    </ul>
+	<ul class="mobile-nav__item-list">
+		<li class="mobile-nav__item">
+			<a class="<%= path === '/' ? 'active' : '' %>" href="/">Models</a>
+		</li>
+		<li class="mobile-nav__item">
+			<a class="<%= path === '/admin/add-model' ? 'active' : '' %>" href="/admin/add-model">Add Model</a>
+		</li>
+		<li class="mobile-nav__item">
+			<a class="<%= path === '/admin' ? 'active' : '' %>" href="/admin">Admin</a>
+		</li>
+	</ul>
 </nav>

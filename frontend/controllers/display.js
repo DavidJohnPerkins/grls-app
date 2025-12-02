@@ -53,7 +53,29 @@ exports.getAddModel = (req, res, next) => {
 }
 
 exports.postAddModel = (req, res, next) => {
-	console.log('Adding model');
+	try {
+		// Ensure body is an object
+		if (!req.body || typeof req.body !== 'object') {
+			return res.status(400).json({ error: 'Invalid request body' });
+		}
+
+		for (const [key, value] of Object.entries(req.body)) {
+			console.log(`Key: ${key}, Value: ${value}`);
+		}
+		console.log(JSON.stringify(req.body));
+		res.json({ message: 'Body processed successfully' });
+	} catch (err) {
+		console.error('Error processing request body:', err);
+		res.status(500).json({ error: 'Internal server error' });
+	}
+
+	//const sobriquet = req.body.sobriquet;
+	//console.log(`Adding model ${req.body.asiz}`);
+	//var data = req.body;
+	//console.log(data);
+	//data.forEach(function (item, value) {
+    //	console.log(item);
+	//});
 }
 
 async function getData(url) {

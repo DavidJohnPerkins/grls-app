@@ -8,22 +8,60 @@
 		<main>
 			<h1 class="centered">Model Addition</h1>
 			<form class="model-form" action="/add-model" method="POST">
-				<div class="form-control">
-					<label for="title">Sobriquet</label>
-					<input type="text" name="sobr" id="sobr">
+				<div class="container">
+					<div class="form-control">
+						<label for="sobr">Sobriquet</label>
+						<input type="text" name="sobriquet" id="sobr">
+					</div>
+					<div class="form-control">
+						<label for="hq">Hotness Quotient</label>
+						<input type="number" name="hq" id="hq" step="1.0">
+					</div>
+					<div class="form-control">
+						<label for="yob">Year of Birth</label>
+						<input type="number" name="yob" id="yob">
+					</div>
 				</div>
 				<div class="form-control">
-					<label for="imageUrl">Thumbnail URL</label>
-					<input type="text" name="imageUrl" id="imageUrl">
-				</div>
-				<div class="form-control">
-					<label for="price">Hotness Quotient</label>
-					<input type="number" name="hq" id="hq" step="1.0">
+					<label for="names">Names</label>
+					<input type="text" name="names" id="names">
 				</div>
 				<div class="form-control">
 					<label for="description">Description</label>
 					<textarea name="description" id="description" rows="5"></textarea>
 				</div>
+				<h3>Images</h3>
+				<div class="container">
+					<div class="form-control">
+						<label for="imageTH">Thumbnail</label>
+						<input type="text" name="imageTH" id="imageTH">
+					</div>
+					<div class="form-control">
+						<label for="imageFA">Face</label>
+						<input type="text" name="imageFA" id="imageFA">
+					</div>
+					<div class="form-control">
+						<label for="imageRF">Reference</label>
+						<input type="text" name="imageRF" id="imageRF">
+					</div>
+					<div class="form-control">
+						<label for="imageBR">Breasts</label>
+						<input type="text" name="imageBR" id="imageBR">
+					</div>
+					<div class="form-control">
+						<label for="imagePF">Pubes Front</label>
+						<input type="text" name="imagePF" id="imagePF">
+					</div>
+					<div class="form-control">
+						<label for="imagePR">Pubes Rear</label>
+						<input type="text" name="imagePR" id="imagePR">
+					</div>
+					<div class="form-control">
+						<label for="imageAR">Arse</label>
+						<input type="text" name="imageAR" id="imageAR">
+					</div>
+				</div>
+				<h3>Attributes</h3>
 				<div class="grid">
 					<article>
 						<p>ASHP</p>
@@ -178,7 +216,7 @@
 						</select>
 					</article>
 				</div>
-				<p>Flags</p>
+				<h3>Flags</h3>
 				<div class="grid">
 					<% for(var count = 0; count < flag_list.length; count++) { %>
 						<article>
@@ -187,7 +225,8 @@
 						</article>						
 					<% } %>
 				</div>
-				<button class="btn" type="submit">Add Model</button>
+				<hr>
+				<button class="btn" type="submit" value="accept">Add Model</button>
 			</form>
 		</main>
             <%- include('../includes/end.ejs') %>

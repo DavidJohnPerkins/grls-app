@@ -43,6 +43,26 @@ async function getModelCards(id) {
 	return result.recordsets[0];
 }
 
+async function addModel(model_data) {
+	var model_json = JSON.stringify(model_data, null, 2);
+
+	const pool = await poolPromise
+	const result = await pool.request()
+		.input('p_input_json', sql.NVarChar(sql.MAX), model_json)
+		.execute('GRLS.c_model_web')
+
+	console.log(`back from c_model_web: ${result.recordsets[0]}`);
+	return result.recordsets[0];
+}
+
+async function getModelId() {
+	const pool = await poolPromise
+	const result = await pool.request()
+		.execute('GRLS.get_model_id')
+
+	return result.recordsets[0];
+}
+
 module.exports = class Model {
 
 /*
@@ -83,5 +103,13 @@ module.exports = class Model {
 
 	static async getFlagList() {
 		return getFlagList();
+	}
+
+	static async addModel(model_data) {
+		return addModel(model_data);
+	}
+
+	static async getModelId() {
+		return getModelId();
 	}
 };

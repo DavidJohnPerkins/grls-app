@@ -50,30 +50,13 @@ app.get('/modelId', async (req, res) => {
 	.catch(err => console.log(err));
 });
 
-/*
-app.post('/addModel', async (req, res) => {
-	console.log('here 2');
-	console.log(req.body);
-	//const modelData = JSON.stringify(req.body);
-	const modelData = req.body;
+app.post('/addModel', async (req, res) => {  
+	const modelData = req.body; // Already parsed by body-parser or express.json()    
 	grls.addModel(modelData)
 	.then((rows) => {
-		res.status(200).send(rows);
-	})
-	.catch(err => console.log(err));
-});
-*/
-
-app.post('/addModel', async (req, res) => {  
-	try {    
-		const modelData = req.body; // Already parsed by body-parser or express.json()    
-		const rows = await grls.addModel(modelData);
-		console.log(`back from /addModel: ${rows}`);
 		res.status(200).send(rows);  
-	} catch (err) {    
-		console.error('Error adding model:', err);    
-		res.status(500).send({ error: 'Failed to add model' });  
-	}
+	})
+	.catch(err => console.error('Error adding model:', err));    
 });
 
 app.listen(8080);

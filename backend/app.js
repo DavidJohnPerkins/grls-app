@@ -54,6 +54,7 @@ app.post('/addModel', async (req, res) => {
 	const modelData = req.body; // Already parsed by body-parser or express.json()    
 	grls.addModel(modelData)
 	.then((rows) => {
+		console.log(`backend app.js addModel rows: ${rows}`);
 		res.status(200).send(rows);  
 	})
 	.catch(err => console.error('Error adding model:', err));    

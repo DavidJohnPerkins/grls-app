@@ -51,6 +51,7 @@ async function addModel(model_data) {
 		.input('p_input_json', sql.NVarChar(sql.MAX), model_json)
 		.execute('GRLS.c_model_web')
 
+	console.log(result.recordsets[1]);
 	return result.recordsets[1];
 }
 

@@ -7,6 +7,7 @@ exports.postAddModel = (req, res, next) => {
 		//const modelData = JSON.stringify(req.body);
 		postData('http://localhost:8080/addModel', req.body)
 			.then(([model]) => {
+				console.log(`update.js model: ${model.model_id}`);
 				const modelId = model.model_id;
 				res.redirect(`/model/${modelId}`);
 			})

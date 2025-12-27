@@ -1,5 +1,6 @@
 const fs = require('fs');
 const dbfunc = require('../util/db_function');
+const helper = require('../util/helper');
 
 exports.getIndex = (req, res, next) => {
 	dbfunc.getData('http://localhost:8080/')
@@ -52,9 +53,10 @@ exports.getContactSheet = (req, res, next) => {
 	fs.readdirSync(imgPath).filter(fn => fn.endsWith('.jpg')).forEach(file => {
 		photos.push(file);
 	})
-	res.render('main-page/model-photo-list', {
+	res.render('main-page/model-contact-sheet', {
+		helper: helper,
 		photos: photos,
-		pageTitle: modelName,
+		pageTitle: 'Contact Sheet',
 		imagePath: imgPath,
 		path: '/'
 	});

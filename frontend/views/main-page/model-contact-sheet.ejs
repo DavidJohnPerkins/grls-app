@@ -9,9 +9,14 @@
 		<main>
 			<div class="grid">
 				<% for (let photo of photos) { %>
+					<% var photo_1; %>
+					<% photo_1 = helper.convertFileName(photo); %>
 					<article class="card model-item">
 						<div class="photo__small">
-							<img src="/detail/<%= imagePath %>/<%= photo %>" alt="blx<%= photo %>">
+							<img src="/thumbnail/<%= photo %>" alt="<%= photo %>">
+						</div>
+						<div class="card__actions">
+							<a href="/images/<%= photo_1 %>" class="btn"><%= photo_1 %> Images</a>
 						</div>
 					</article>
 				<% } %>

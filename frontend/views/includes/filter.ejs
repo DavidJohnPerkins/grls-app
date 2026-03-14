@@ -1,7 +1,9 @@
 <div class="backdrop"></div>
 <header class="main-header">
-	<div class="card__actions">
-		<input type="text" name="names" id="names">
-		<a href="/images/" class="btn">Filter</a>
-	</div>
+	<form action="/filtered-index" method="GET">
+		<label for="search_term">Name</label>
+		<input type="text" name="search_term" id="search_term">
+		<button class="btn" type="submit" value="accept">Filter</button>
+	</form>
 </header>
+

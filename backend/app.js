@@ -6,9 +6,19 @@ const app = express();
 app.use(express.json());
 
 const grls = require('./sql-grlsdb');
+const { search } = require('../frontend/routes/display');
 
 app.get('/', async (req, res) => {
 	grls.getModelCards()
+	.then((rows) => {
+		res.status(200).send(rows);
+	})
+	.catch(err => console.log(err));
+});
+
+app.get('/filtered-index/:searchTerm', async (req, res) => {
+	searchTerm = req.params.searchTerm;
+	grls.getFilteredIndex(searchTerm)
 	.then((rows) => {
 		res.status(200).send(rows);
 	})

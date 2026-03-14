@@ -43,6 +43,18 @@ async function getModelCards(id) {
 	return result.recordsets[0];
 }
 
+async function getFilteredIndex(searchTerm) {
+	console.log(searchTerm.replaceAll('~', '%'));
+	var p_input_json = `{"search_term": "${searchTerm.replaceAll('~', '%')}"}`
+
+	const pool = await poolPromise
+	const result = await pool.request()
+		.input('p_input_json', sql.NVarChar(sql.MAX), p_input_json)
+		.execute('GRLS.r_model_search')
+
+	return result.recordsets[0];
+}
+
 async function addModel(model_data) {
 	var model_json = JSON.stringify(model_data, null, 2);
 
@@ -95,6 +107,10 @@ module.exports = class Model {
 
 	static async findById(id) {
 		return findModel(id);
+	}
+
+	static async getFilteredIndex(searchTerm) {
+		return getFilteredIndex(searchTerm);
 	}
 
 	static async getAttributeList(abbrev) {

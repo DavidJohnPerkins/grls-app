@@ -14,6 +14,20 @@ exports.getIndex = (req, res, next) => {
 		.catch(err => console.log(err));
 };
 
+exports.getFilteredIndex = (req, res, next) => {
+	const searchTerm = req.query.search_term;
+	console.log(searchTerm);
+	dbfunc.getData(`http://localhost:8080/filtered-index/${searchTerm}`)
+		.then((rows) => {
+			res.render('main-page/model-list', {
+				models: rows,
+				pageTitle: 'Model List',
+				path: '/'
+			});
+		})
+		.catch(err => console.log(err));
+};
+
 exports.getModelByID = (req, res, next) => {
 	const modelId = req.params.modelId;
 	dbfunc.getData(`http://localhost:8080/model/${modelId}`)

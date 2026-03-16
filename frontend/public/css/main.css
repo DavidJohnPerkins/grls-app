@@ -19,6 +19,10 @@ form {
   display: inline;
 }
 
+.filter-label {
+  color: white;
+}
+
 .parent {
   margin: 1rem;
   padding: 2rem 2rem;

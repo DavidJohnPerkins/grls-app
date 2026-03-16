@@ -15,7 +15,12 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getFilteredIndex = (req, res, next) => {
-	const searchTerm = req.query.search_term;
+	if (req.query.search_term === '') {
+		searchTerm = '~';
+	} else 
+	{
+		searchTerm = req.query.search_term;
+	}	
 	console.log(searchTerm);
 	dbfunc.getData(`http://localhost:8080/filtered-index/${searchTerm}`)
 		.then((rows) => {

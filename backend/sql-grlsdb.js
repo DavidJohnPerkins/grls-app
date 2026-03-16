@@ -44,7 +44,6 @@ async function getModelCards(id) {
 }
 
 async function getFilteredIndex(searchTerm) {
-	console.log(searchTerm.replaceAll('~', '%'));
 	var p_input_json = `{"search_term": "${searchTerm.replaceAll('~', '%')}"}`
 
 	const pool = await poolPromise

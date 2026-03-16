@@ -9,6 +9,9 @@
   margin-bottom: 0.25rem;
 }
 
+.form-control label {
+  color: black;
+}
 
 .form-control input,
 .form-control textarea {

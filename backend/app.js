@@ -70,4 +70,13 @@ app.post('/addModel', async (req, res) => {
 	.catch(err => console.error('Error adding model:', err));    
 });
 
+app.get('/movieList', async (req, res) => {
+	grls.getMovieList("~", 1)
+	.then((rows) => {
+		res.status(200).send(rows);
+	})
+	.catch(err => console.log(err));
+});
+
+
 app.listen(8080);

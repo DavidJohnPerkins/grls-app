@@ -74,6 +74,17 @@ async function getModelId() {
 	return result.recordsets[0];
 }
 
+async function getMovieList(searchTerm, minRating) {
+	var p_input_json = `{"search_term": "${searchTerm.replaceAll('~', '%')}", "minimum_rating": ${minRating}}`
+
+	const pool = await poolPromise
+	const result = await pool.request()
+		.input('p_input_json', sql.NVarChar(sql.MAX), p_input_json)
+		.execute('GRLS.r_movie_list')
+
+	return result.recordsets[0];
+}
+
 module.exports = class Model {
 
 /*
@@ -126,5 +137,9 @@ module.exports = class Model {
 
 	static async getModelId() {
 		return getModelId();
+	}
+
+	static async getMovieList(searchTerm, minRating) {
+		return getMovieList(searchTerm, minRating);
 	}
 };

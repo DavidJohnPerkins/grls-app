@@ -65,6 +65,18 @@ exports.getModelImagesByName = (req, res, next) => {
 	});
 };
 
+exports.getMovieList = (req, res, next) => {
+	dbfunc.getData('http://localhost:8080/movieList')
+		.then((rows) => {
+			res.render('main-page/movie-list', {
+				movies: rows,
+				pageTitle: 'Movie List',
+				path: '/'
+			});
+		})
+		.catch(err => console.log(err));
+};
+
 exports.getContactSheet = (req, res, next) => {
 	imgPath = "../../../../public/thumbnail/";
 	
@@ -90,3 +102,38 @@ exports.getModelId = (req, res, next) => {
 		})
 		.catch(err => console.log(err));
 };
+
+exports.getPlayMovie = (req, res, next) => {
+// Define a route for serving the video file
+	videoTitle = req.params.movieTitle;
+	videoPath = `../../../../Public/movie/${videoTitle}.mp4`;
+	stat = fs.statSync(videoPath);
+	fileSize = stat.size;
+	range = req.headers.range;
+
+	if (range) {
+		parts = range.replace(/bytes=/, '').split('-');
+		start = parseInt(parts[0], 10);
+		end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+		chunkSize = end - start + 1;
+		file = fs.createReadStream(videoPath, { start, end });
+		head = {
+			'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+			'Accept-Ranges': 'bytes',
+			'Content-Length': chunkSize,
+			'Content-Type': 'video/mp4',
+		};
+
+		res.writeHead(206, head);
+		file.pipe(res);
+	} else {
+		const head = {
+			'Content-Length': fileSize,
+			'Content-Type': 'video/mp4',
+		};
+
+		res.writeHead(200, head);
+		fs.createReadStream(videoPath).pipe(res);
+	}
+};
+

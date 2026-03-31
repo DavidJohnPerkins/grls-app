@@ -12,8 +12,8 @@
 					<% for (let movie of movies) { %>
 						<article class="card model-item">
 							<header class="card__header">
-								<h1 class="model__name">
-									<%= movie.title %>
+								<h1 class="movie__title">
+									<%= movie.title %>    (<%= movie.rating %>)
 								</h1>
 							</header>
 							<div class="model__image">
@@ -25,9 +25,6 @@
 								<img src="movie-image/<%= movie.title %>_4.png" alt="<%= movie.title %>">
 							</div>
 							<div class="card__content">
-								<h2 class="model__hq">
-									<%= movie.rating %>
-								</h2>
 								<p class="model__nationality">
 									<%= movie.comment %>
 								</p>

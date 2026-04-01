@@ -37,6 +37,9 @@
 							<div class="card__actions">
 								<a href="/model/<%= model.id %>" class="btn">Details</a>
 								<a href="/images/<%= model.principal_name %>" class="btn">Images</a>
+								<% if(model.movie_count != 0) { %>
+									<a href="/images/<%= model.principal_name %>" class="btn">Movies</a>
+								<% } %>							
 							</div>
 						</article>
 					<% } %>

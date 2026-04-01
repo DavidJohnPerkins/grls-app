@@ -74,8 +74,8 @@ async function getModelId() {
 	return result.recordsets[0];
 }
 
-async function getMovieList(searchTerm, minRating) {
-	var p_input_json = `{"search_term": "${searchTerm.replaceAll('~', '%')}", "minimum_rating": ${minRating}}`
+async function getMovieList(modelId, searchTerm, minRating) {
+	var p_input_json = `{"model_id": ${modelId}, "search_term": "${searchTerm.replaceAll('~', '%')}", "minimum_rating": ${minRating}}`
 
 	const pool = await poolPromise
 	const result = await pool.request()
@@ -139,7 +139,7 @@ module.exports = class Model {
 		return getModelId();
 	}
 
-	static async getMovieList(searchTerm, minRating) {
-		return getMovieList(searchTerm, minRating);
+	static async getMovieList(modelId, searchTerm, minRating) {
+		return getMovieList(modelId, searchTerm, minRating);
 	}
 };

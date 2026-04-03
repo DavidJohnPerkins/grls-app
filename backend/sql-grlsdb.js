@@ -74,8 +74,13 @@ async function getModelId() {
 	return result.recordsets[0];
 }
 
-async function getMovieList(modelId, searchTerm, minRating) {
-	var p_input_json = `{"model_id": ${modelId}, "search_term": "${searchTerm.replaceAll('~', '%')}", "minimum_rating": ${minRating}}`
+async function getMovieList(modelId, titleSearchTerm, commentSearchTerm, minRating) {
+	var p_input_json = `{
+		"model_id": ${modelId}, 
+		"title_search_term": "${titleSearchTerm.replaceAll('~', '%')}", 
+		"comment_search_term": "${commentSearchTerm.replaceAll('~', '%')}", 
+		"minimum_rating": ${minRating}
+	}`
 
 	const pool = await poolPromise
 	const result = await pool.request()
@@ -139,7 +144,7 @@ module.exports = class Model {
 		return getModelId();
 	}
 
-	static async getMovieList(modelId, searchTerm, minRating) {
-		return getMovieList(modelId, searchTerm, minRating);
+	static async getMovieList(modelId, titleSearchTerm, commentSearchTerm, minRating) {
+		return getMovieList(modelId, titleSearchTerm, commentSearchTerm, minRating);
 	}
 };

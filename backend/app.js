@@ -71,7 +71,7 @@ app.post('/addModel', async (req, res) => {
 });
 
 app.get('/movieList', async (req, res) => {
-	grls.getMovieList(-1, "~", 1)
+	grls.getMovieList(-1, "~", "~", 1)
 	.then((rows) => {
 		res.status(200).send(rows);
 	})

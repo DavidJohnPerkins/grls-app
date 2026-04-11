@@ -6,7 +6,7 @@
 		<%- include('../includes/navigation.ejs') %>
 		<main class="centered">
 			<h1><%= model.principal_name %></h1>
-			<% if (model.aliases != null) { %>
+			<% if (model.aliases != "") { %>
 				<p>Also known as: <%= model.aliases %></p>
 			<% } else { %>
 				<p>No Aliases<p>

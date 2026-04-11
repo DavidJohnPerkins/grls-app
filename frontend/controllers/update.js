@@ -2,26 +2,26 @@ const dbfunc = require('../util/db_function');
 
 exports.getAddModel = (req, res, next) => {
 	Promise.all([
-		dbfunc.getData("http://localhost:8080/attributeList/ASHP"),
-		dbfunc.getData("http://localhost:8080/attributeList/ASIZ"),
-		dbfunc.getData("http://localhost:8080/attributeList/ATTR"),
-		dbfunc.getData("http://localhost:8080/attributeList/BILD"),
-		dbfunc.getData("http://localhost:8080/attributeList/BRDR"),
-		dbfunc.getData("http://localhost:8080/attributeList/BRSH"),
-		dbfunc.getData("http://localhost:8080/attributeList/BSIZ"),
-		dbfunc.getData("http://localhost:8080/attributeList/CMPX"),
-		dbfunc.getData("http://localhost:8080/attributeList/ETHN"),
-		dbfunc.getData("http://localhost:8080/attributeList/EYES"),
-		dbfunc.getData("http://localhost:8080/attributeList/HAIR"),
-		dbfunc.getData("http://localhost:8080/attributeList/MONS"),
-		dbfunc.getData("http://localhost:8080/attributeList/NATN"),
-		dbfunc.getData("http://localhost:8080/attributeList/NPCL"),
-		dbfunc.getData("http://localhost:8080/attributeList/NPPF"),
-		dbfunc.getData("http://localhost:8080/attributeList/NPSH"),
-		dbfunc.getData("http://localhost:8080/attributeList/NPSZ"),
-		dbfunc.getData("http://localhost:8080/attributeList/PUAT"),
-		dbfunc.getData("http://localhost:8080/attributeList/YTHF"),
-		dbfunc.getData("http://localhost:8080/flaglist")
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/ASHP"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/ASIZ"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/ATTR"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/BILD"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/BRDR"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/BRSH"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/BSIZ"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/CMPX"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/ETHN"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/EYES"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/HAIR"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/MONS"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/NATN"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/NPCL"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/NPPF"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/NPSH"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/NPSZ"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/PUAT"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/attr/YTHF"),
+		dbfunc.getData("http://localhost:8080/api/grls/add/flags/MOD")
 	])
 	.then((arr) => {
 		res.render('main-page/model-add', {

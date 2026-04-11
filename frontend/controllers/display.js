@@ -3,7 +3,7 @@ const dbfunc = require('../util/db_function');
 const helper = require('../util/helper');
 
 exports.getIndex = (req, res, next) => {
-	dbfunc.getData('http://localhost:8080/')
+	dbfunc.getData('http://localhost:8080/api/grls/')
 		.then((rows) => {
 			res.render('main-page/model-list', {
 				models: rows,
@@ -21,8 +21,8 @@ exports.getFilteredIndex = (req, res, next) => {
 	{
 		searchTerm = req.query.search_term;
 	}	
-	console.log(searchTerm);
-	dbfunc.getData(`http://localhost:8080/filtered-index/${searchTerm}`)
+	//dbfunc.getData(`http://localhost:8080/filtered-index/${searchTerm}`)
+	dbfunc.getData(`http://localhost:8080/api/grls/search/${searchTerm}`)
 		.then((rows) => {
 			res.render('main-page/model-list', {
 				models: rows,
@@ -35,8 +35,10 @@ exports.getFilteredIndex = (req, res, next) => {
 
 exports.getModelByID = (req, res, next) => {
 	const modelId = req.params.modelId;
-	dbfunc.getData(`http://localhost:8080/model/${modelId}`)
-		.then(([model]) => {
+	console.log(modelId);
+	//dbfunc.getData(`http://localhost:8080/model/${modelId}`)
+	dbfunc.getData(`http://localhost:8080/api/grls/${modelId}`)
+		.then(model => {
 			imgPath = model.principal_name.substring(0, 1) + "/" + model.principal_name;
 			res.render('main-page/model-detail', {
 				model: model,
@@ -66,7 +68,8 @@ exports.getModelImagesByName = (req, res, next) => {
 };
 
 exports.getMovieList = (req, res, next) => {
-	dbfunc.getData('http://localhost:8080/movieList')
+	//dbfunc.getData('http://localhost:8080/movieList')
+	dbfunc.getData('http://localhost:8080/api/grls/movies/')
 		.then((rows) => {
 			res.render('main-page/movie-list', {
 				movies: rows,

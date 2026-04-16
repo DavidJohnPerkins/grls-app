@@ -13,7 +13,7 @@ router.get('/', displayController.getIndex);
 router.get('/model/:modelId', displayController.getModelByID);
 router.get('/images/:modelName', displayController.getModelImagesByName);
 router.get('/contact-sheet', displayController.getContactSheet);
-router.get('/movies', displayController.getMovieList);
+router.get('/movies/:modelId', displayController.getMovieList);
 router.get('/filtered-index', displayController.getFilteredIndex);
 
 router.get('/movie/:movieTitle', displayController.getPlayMovie);

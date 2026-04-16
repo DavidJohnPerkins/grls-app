@@ -35,8 +35,6 @@ exports.getFilteredIndex = (req, res, next) => {
 
 exports.getModelByID = (req, res, next) => {
 	const modelId = req.params.modelId;
-	console.log(modelId);
-	//dbfunc.getData(`http://localhost:8080/model/${modelId}`)
 	dbfunc.getData(`http://localhost:8080/api/grls/${modelId}`)
 		.then(model => {
 			imgPath = model.principal_name.substring(0, 1) + "/" + model.principal_name;
@@ -68,8 +66,9 @@ exports.getModelImagesByName = (req, res, next) => {
 };
 
 exports.getMovieList = (req, res, next) => {
-	//dbfunc.getData('http://localhost:8080/movieList')
-	dbfunc.getData('http://localhost:8080/api/grls/movies/')
+	const modelId = req.params.modelId;
+	console.log(modelId);
+	dbfunc.getData(`http://localhost:8080/api/grls/movies/${modelId}`)
 		.then((rows) => {
 			res.render('main-page/movie-list', {
 				movies: rows,

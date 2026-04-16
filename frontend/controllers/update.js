@@ -51,22 +51,26 @@ exports.getAddModel = (req, res, next) => {
 	})
 	.catch(err => console.log(err));
 }
+
 exports.postAddModel = (req, res, next) => {
 	try {
 		if (!req.body || typeof req.body !== 'object') {
 			return res.status(400).json({ error: 'Invalid request body' });
 		}
-		
-		//const modelData = JSON.stringify(req.body);
-		dbfunc.postData('http://localhost:8080/addModel', req.body)
-			.then(([model]) => {
-				console.log(`update.js model: ${model.model_id}`);
-				const modelId = model.model_id;
-				res.redirect(`/model/${modelId}`);
+
+		const model_data = req.body;
+		dbfunc.postData("http://localhost:8080/model/create", model_data)
+			.then(() => {
+				console.log("returned");
+				res.redirect("/model");
 			})
-			.catch(err => console.log(err));		
-	} catch (error) {
-		console.error(error);
-		return res.status(500).json({ error: 'Internal server error' });
+			.catch(err => {
+				console.error(err);
+				res.status(500).json({ error: "Failed to create model" });
+			});
+
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: "Unexpected server error" });
 	}
 };

@@ -12,7 +12,6 @@ async function postData(url, reqBody) {
 	});
 
 	const body = await response.json();
-
 	return body;
 };
 module.exports.getData = getData;

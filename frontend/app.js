@@ -9,10 +9,12 @@ const errorController = require('./controllers/error');
 const app = express();
 console.log(__dirname);
 
-app.use('/thumbnail', express.static(path.join(__dirname, '../../../../public/thumbnail')));
-app.use('/detail', express.static(path.join(__dirname, '../../../../public/detail')));
-app.use('/movie', express.static(path.join(__dirname, '../../../../public/movie')));
-app.use('/movie-image', express.static(path.join(__dirname, '../../../../public/movie-image')));
+//app.use('/thumbnail', express.static(path.join(__dirname, '../../../../public/thumbnail')));
+//app.use('/detail', express.static(path.join(__dirname, '../../../../public/detail')));
+//app.use('/movie', express.static(path.join(__dirname, '../../../../public/movie')));
+//app.use('/movie-image', express.static(path.join(__dirname, '../../../../public/movie-image')));
+
+app.use('/images', express.static('/app/images'));
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');

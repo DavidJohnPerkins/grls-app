@@ -2,8 +2,13 @@ const fs = require('fs');
 const dbfunc = require('../util/db_function');
 const helper = require('../util/helper');
 
+const { server, db } = require("../config");
+
+console.log("Server port:", server.port);
+console.log("DB URL:", db.url);
+
 exports.getIndex = (req, res, next) => {
-	dbfunc.getData('http://localhost:8080/api/grls/model')
+	dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model`)
 		.then((rows) => {
 			res.render('main-page/model-list', {
 				models: rows,
@@ -22,7 +27,7 @@ exports.getFilteredIndex = (req, res, next) => {
 		searchTerm = req.query.search_term;
 	}	
 	//dbfunc.getData(`http://localhost:8080/filtered-index/${searchTerm}`)
-	dbfunc.getData(`http://localhost:8080/api/grls/modelsearch/${searchTerm}`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/grls/modelsearch/${searchTerm}`)
 		.then((rows) => {
 			res.render('main-page/model-list', {
 				models: rows,
@@ -35,7 +40,7 @@ exports.getFilteredIndex = (req, res, next) => {
 
 exports.getModelByID = (req, res, next) => {
 	const modelId = req.params.modelId;
-	dbfunc.getData(`http://localhost:8080/api/grls/model/${modelId}`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model/${modelId}`)
 		.then(model => {
 			imgPath = model.principal_name.substring(0, 1) + "/" + model.principal_name;
 			res.render('main-page/model-detail', {
@@ -50,7 +55,7 @@ exports.getModelByID = (req, res, next) => {
 
 exports.getModelImagesByName = (req, res, next) => {
 	const modelName = req.params.modelName;
-	localPath = "../../../../public/detail/" + modelName.substring(0, 1) + "/" + modelName;
+	localPath = "/app/images/detail/" + modelName.substring(0, 1) + "/" + modelName;
 	imgPath = modelName.substring(0, 1) + "/" + modelName;
 	
 	var photos = [];
@@ -68,7 +73,7 @@ exports.getModelImagesByName = (req, res, next) => {
 exports.getMovieList = (req, res, next) => {
 	const modelId = req.params.modelId;
 	console.log(modelId);
-	dbfunc.getData(`http://localhost:8080/api/grls/movies/${modelId}`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/grls/movies/${modelId}`)
 		.then((rows) => {
 			res.render('main-page/movie-list', {
 				movies: rows,
@@ -80,7 +85,7 @@ exports.getMovieList = (req, res, next) => {
 };
 
 exports.getContactSheet = (req, res, next) => {
-	imgPath = "../../../../public/thumbnail/";
+	imgPath = "/app/images/thumbnail/";
 	
 	var photos = [];
 	fs.readdirSync(imgPath).filter(fn => fn.endsWith('.jpg')).forEach(file => {
@@ -96,7 +101,7 @@ exports.getContactSheet = (req, res, next) => {
 };
 
 exports.getModelId = (req, res, next) => {
-	dbfunc.getData('http://localhost:8080/modelId')
+	dbfunc.getData('http://${db.url}:${server.port}/modelId')
 		.then(([model]) => {
 			const modelId = model.model_id;
 			console.log(modelId);

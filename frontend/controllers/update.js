@@ -1,27 +1,28 @@
 const dbfunc = require('../util/db_function');
+const { server, db } = require("../config");
 
 exports.getAddModel = (req, res, next) => {
 	Promise.all([
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/ASHP"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/ASIZ"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/ATTR"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/BILD"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/BRDR"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/BRSH"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/BSIZ"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/CMPX"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/ETHN"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/EYES"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/HAIR"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/MONS"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/NATN"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/NPCL"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/NPPF"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/NPSH"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/NPSZ"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/PUAT"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/attr/YTHF"),
-		dbfunc.getData("http://localhost:8080/api/grls/add/flags/MOD")
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/ASHP`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/ASIZ`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/ATTR`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/BILD`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/BRDR`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/BRSH`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/BSIZ`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/CMPX`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/ETHN`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/EYES`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/HAIR`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/MONS`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/NATN`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/NPCL`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/NPPF`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/NPSH`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/NPSZ`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/PUAT`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/attr/YTHF`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/flags/MOD`)
 	])
 	.then((arr) => {
 		res.render('main-page/model-add', {
@@ -57,7 +58,7 @@ exports.postAddModel = (req, res, next) => {
 		if (!req.body || typeof req.body !== 'object') {
 			return res.status(400).json({ error: 'Invalid request body' });
 		}
-		dbfunc.postData("http://localhost:8080/api/grls/model/create", req.body)
+		dbfunc.postData("http://${db.url}:${server.port}/api/grls/model/create", req.body)
 			.then(() => {
 				res.redirect("/model");
 			})

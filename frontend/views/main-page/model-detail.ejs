@@ -13,6 +13,11 @@
 			<% } %>
 			<h2><%= model.comment %></h2>
 			<hr>
+			<% for (let a of associates) { %>
+				<p class="model__flags">
+					<%= a.principal_name %>
+				</p>
+			<% } %>
 			<div class="parent">
 				<div class="child child__left">
 					<div class="model__detail__image">

@@ -26,7 +26,6 @@ exports.getFilteredIndex = (req, res, next) => {
 	{
 		searchTerm = req.query.search_term;
 	}	
-	//dbfunc.getData(`http://localhost:8080/filtered-index/${searchTerm}`)
 	dbfunc.getData(`http://${db.url}:${server.port}/api/grls/modelsearch/${searchTerm}`)
 		.then((rows) => {
 			res.render('main-page/model-list', {
@@ -38,19 +37,28 @@ exports.getFilteredIndex = (req, res, next) => {
 		.catch(err => console.log(err));
 };
 
-exports.getModelByID = (req, res, next) => {
-	const modelId = req.params.modelId;
-	dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model/${modelId}`)
-		.then(model => {
-			imgPath = model.principal_name.substring(0, 1) + "/" + model.principal_name;
-			res.render('main-page/model-detail', {
-				model: model,
-				pageTitle: model.principal_name,
-				imagePath: imgPath,
-				path: '/'
-			});
-		})
-		.catch(err => console.log(err));
+exports.getModelByID = async (req, res, next) => {
+    try {
+        const modelId = req.params.modelId;
+
+        const [model, associates] = await Promise.all([
+            dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model/${modelId}`),
+            dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model/associates/${modelId}`)
+        ]);
+
+        const imgPath = model.principal_name.substring(0, 1) + "/" + model.principal_name;
+
+        res.render('main-page/model-detail', {
+            model,
+            associates,
+            pageTitle: model.principal_name,
+            imagePath: imgPath,
+            path: '/'
+        });
+
+    } catch (err) {
+        console.error(err);
+	}
 };
 
 exports.getModelImagesByName = (req, res, next) => {

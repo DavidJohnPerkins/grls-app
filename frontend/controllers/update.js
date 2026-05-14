@@ -58,7 +58,7 @@ exports.postAddModel = (req, res, next) => {
 		if (!req.body || typeof req.body !== 'object') {
 			return res.status(400).json({ error: 'Invalid request body' });
 		}
-		dbfunc.postData("http://${db.url}:${server.port}/api/grls/model/create", req.body)
+		dbfunc.postData(`http://${db.url}:${server.port}/api/grls/model/create`, req.body)
 			.then(() => {
 				res.redirect("/model");
 			})

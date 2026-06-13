@@ -8,39 +8,41 @@
 		<%- include('../includes/filter.ejs') %>
 
 		<main>
-			<% if (movies.length > 0) { %>
-				<div class="grid">
-					<% for (let movie of movies) { %>
-						<article class="card model-item">
-							<header class="card__header">
-								<h1 class="movie__title">
-									<%= movie.title %>    (<%= movie.rating %>)
-								</h1>
-							</header>
-							<div class="model__image">
-								<img src="/images/movie-image/<%= movie.image_folder %>/<%= movie.title %>_1.png" alt="<%= movie.title %>">
-								<img src="/images/movie-image/<%= movie.image_folder %>/<%= movie.title %>_2.png" alt="<%= movie.title %>">
-							</div>
-							<div class="model__image">
-								<img src="/images/movie-image/<%= movie.image_folder %>/<%= movie.title %>_3.png" alt="<%= movie.title %>">
-								<img src="/images/movie-image/<%= movie.image_folder %>/<%= movie.title %>_4.png" alt="<%= movie.title %>">
-							</div>
-							<div class="card__content">
-								<p class="model__nationality">
-									<%= movie.comment %>
-								</p>
-								<p class="model__flags">
-									<%= movie.flags %>
-								</p>
-							</div>
-							<div class="card__actions">
-								<a href="/movie/<%= movie.title %>" class="btn">Play</a>
-							</div>
-						</article>
-					<% } %>
-				</div>
-			<% } else { %>
-				<h1>No Movies Found</h1>
-			<% } %>
+			<section class="content">
+				<% if (movies.length > 0) { %>
+					<div class="grid">
+						<% for (let movie of movies) { %>
+							<article class="card model-item">
+								<header class="card__header">
+									<h1 class="movie__title">
+										<%= movie.title %>    (<%= movie.rating %>)
+									</h1>
+								</header>
+								<div class="model__image">
+									<img src="/images/movie-image/<%= movie.image_folder %>/<%= movie.title %>_1.png" alt="<%= movie.title %>">
+									<img src="/images/movie-image/<%= movie.image_folder %>/<%= movie.title %>_2.png" alt="<%= movie.title %>">
+								</div>
+								<div class="model__image">
+									<img src="/images/movie-image/<%= movie.image_folder %>/<%= movie.title %>_3.png" alt="<%= movie.title %>">
+									<img src="/images/movie-image/<%= movie.image_folder %>/<%= movie.title %>_4.png" alt="<%= movie.title %>">
+								</div>
+								<div class="card__content">
+									<p class="model__nationality">
+										<%= movie.comment %>
+									</p>
+									<p class="model__flags">
+										<%= movie.flags %>
+									</p>
+								</div>
+								<div class="card__actions">
+									<a href="/movie/<%= movie.title %>" class="btn">Play</a>
+								</div>
+							</article>
+						<% } %>
+					</div>
+				<% } else { %>
+					<h1>No Movies Found</h1>
+				<% } %>
+			</section>
 		</main>
 		<%- include('../includes/end.ejs') %>

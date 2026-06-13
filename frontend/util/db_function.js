@@ -1,4 +1,5 @@
 async function getData(url) {
+	console.log(url);
 	const response = await fetch(url);
 	const body = await response.json();
 	return body;

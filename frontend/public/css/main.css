@@ -13,10 +13,22 @@ body {
 main {
   padding: 1rem;
   margin: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
 }
 
 form {
   display: inline;
+}
+
+.sidebar {
+    width: 240px;
+    flex-shrink: 0;
+}
+
+.content {
+    flex: 1;
 }
 
 .filter-label {
@@ -159,14 +171,22 @@ form {
 }
 
 .grid {
-  display: flex;
+/*  display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: stretch;
+  align-items: stretch;*/
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  padding: 20px;
 }
 
 .card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card__header,

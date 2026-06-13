@@ -5,47 +5,52 @@
 
 	<body>
 		<%- include('../includes/navigation.ejs') %>
-		<%- include('../includes/filter.ejs') %>
-
 		<main>
-			<% if (models.length > 0) { %>
-				<div class="grid">
-					<% for (let model of models) { %>
-						<article class="card model-item">
-							<header class="card__header">
-								<h1 class="model__name">
-									<%= model.principal_name %>
-								</h1>
-							</header>
-							<div class="model__image">
-								<img src="/images/thumbnail/<%= model.th_url %>" alt="<%= model.principal_name %>">
-							</div>
-							<div class="card__content">
-								<h2 class="model__hq">
-									<%= model.hotness_quotient %>
-								</h2>
-								<p class="model__nationality">
-									<%= model.nationality %>
-								</p>
-								<p class="model__flags">
-									<%= model.flags %>
-								</p>
-								<p class="model__flags">
-									Id: <%= model.id %> | Rank: <%= model.ranking %>
-								</p>
-							</div>
-							<div class="card__actions">
-								<a href="/model/<%= model.id %>" class="btn">Details</a>
-								<a href="/images/<%= model.principal_name %>" class="btn">Images</a>
-								<% if(model.movie_count != 0) { %>
-									<a href="/movies/<%= model.id %>" class="btn">Movies</a>
-								<% } %>							
-							</div>
-						</article>
-					<% } %>
-				</div>
-			<% } else { %>
-				<h1>No Models Found</h1>
-			<% } %>
+			<aside class="sidebar">
+				<h2>Filters</h2>
+				<%- include('../includes/filter.ejs') %>
+			</aside>
+
+			<section class="content">
+				<% if (models.length > 0) { %>
+					<div class="grid">
+						<% for (let model of models) { %>
+							<article class="card model-item">
+								<header class="card__header">
+									<h1 class="model__name">
+										<%= model.principal_name %>
+									</h1>
+								</header>
+								<div class="model__image">
+									<img src="/images/thumbnail/<%= model.th_url %>" alt="<%= model.principal_name %>">
+								</div>
+								<div class="card__content">
+									<h2 class="model__hq">
+										<%= model.hotness_quotient %>
+									</h2>
+									<p class="model__nationality">
+										<%= model.nationality %>
+									</p>
+									<p class="model__flags">
+										<%= model.flags %>
+									</p>
+									<p class="model__flags">
+										Id: <%= model.id %> | Rank: <%= model.ranking %>
+									</p>
+								</div>
+								<div class="card__actions">
+									<a href="/model/<%= model.id %>" class="btn">Details</a>
+									<a href="/images/<%= model.principal_name %>" class="btn">Images</a>
+									<% if(model.movie_count != 0) { %>
+										<a href="/movies/<%= model.id %>" class="btn">Movies</a>
+									<% } %>							
+								</div>
+							</article>
+						<% } %>
+					</div>
+				<% } else { %>
+					<h1>No Models Found</h1>
+				<% } %>
+			</section>
 		</main>
 		<%- include('../includes/end.ejs') %>

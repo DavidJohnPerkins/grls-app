@@ -7,14 +7,16 @@
 		<%- include('../includes/navigation.ejs') %>
 
 		<main>
-			<div class="grid">
-				<% for (let photo of photos) { %>
-					<article class="card model-item">
-						<div class="photo__small">
-							<img src="/images/detail/<%= imagePath %>/<%= photo %>" alt="blx<%= photo %>">
-						</div>
-					</article>
-				<% } %>
-			</div>
+		    <section class="content">
+				<div class="grid">
+					<% for (let photo of photos) { %>
+						<article class="card model-item">
+							<div class="photo__small">
+								<img src="/images/detail/<%= imagePath %>/<%= photo %>" alt="blx<%= photo %>">
+							</div>
+						</article>
+					<% } %>
+				</div>
+			</section>
 		</main>
 		<%- include('../includes/end.ejs') %>

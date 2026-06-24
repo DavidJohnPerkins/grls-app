@@ -8,34 +8,56 @@ console.log("Server port:", server.port);
 console.log("DB URL:", db.url);
 
 exports.getIndex = (req, res, next) => {
-	dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model`)
-		.then((rows) => {
-			res.render('main-page/model-list', {
-				models: rows,
-				pageTitle: 'Model List',
-				path: '/'
-			});
-		})
-		.catch(err => console.log(err));
+	Promise.all([
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/flags/MOD`),
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model`)
+	])
+	.then((arr) => {
+		res.render('main-page/model-list', {
+			flag_list: arr[0],
+			models: arr[1],
+			pageTitle: 'Model List',
+			path: '/'
+		});
+	})
+	.catch(err => console.log(err));
 };
 
 exports.getFilteredIndex = (req, res, next) => {
+	/*
+	console.log(req.query);
 	if (req.query.search_term === '') {
 		searchTerm = '~';
 	} else 
 	{
 		searchTerm = req.query.search_term;
-	}	
-	dbfunc.getData(`http://${db.url}:${server.port}/api/grls/modelsearch/${searchTerm}`)
-		.then((rows) => {
-			res.render('main-page/model-list', {
-				models: rows,
-				pageTitle: 'Model List',
-				path: '/'
-			});
-		})
-		.catch(err => console.log(err));
+	}
+	flags = req.query.flags;*/
+	var searchTerm = req.query.search_term;
+	if (searchTerm === '') {
+		searchTerm = '~';
+	}
+	const flags  = JSON.stringify(req.query.flags);
+	const url = new URL(`http://${db.url}:${server.port}/api/grls/modelsearch/${searchTerm}`);
+	url.searchParams.set("flags", flags);
+
+		//dbfunc.getData(`http://${db.url}:${server.port}/api/grls/modelsearch/${searchTerm}`)
+
+	Promise.all([
+		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/flags/MOD`),
+		dbfunc.getData(url.toString())
+	])
+	.then((arr) => {
+		res.render('main-page/model-list', {
+			flag_list: arr[0],
+			models: arr[1],
+			pageTitle: 'Model List',
+			path: '/'
+		});
+	})
+	.catch(err => console.log(err));
 };
+
 
 exports.getModelByID = async (req, res, next) => {
     try {

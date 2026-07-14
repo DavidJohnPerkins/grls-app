@@ -1,16 +1,15 @@
 <div class="backdrop"></div>
 <form action="/filtered-index" method="GET">
 	<label class="filter-labelx" for="search_term">Name</label>
-	<input type="text" name="search_term" id="search_term">
+	<input type="text" name="search_term" id="search_term" value="<%= search_term %>">
 	<button class="btn" type="submit" value="accept">Filter</button>
+	<button class="btn" type="submit" name="reset" value="1">Reset</button>
 	<h3>Flags</h3>
 	<div class="grid">
 		<% for(var count = 0; count < flag_list.length; count++) { %>
 			<article>
 				<label><%= flag_list[count].flag_abbrev %></label>
-				<input type="checkbox" name="flags[]" value="<%= flag_list[count].flag_abbrev %>">
-				<!--<input type="checkbox" name="flag_<%= flag_list[count].flag_abbrev %>" id="<%= flag_list[count].flag_abbrev %>" value="false"> -->
-			</article>						
+				<input type="checkbox" name="flags[]" value="<%= flag_list[count].flag_abbrev %>" <%= flags.includes(flag_list[count].flag_abbrev) ? 'checked' : '' %>>
 		<% } %>
 	</div>
 </form>

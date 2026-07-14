@@ -23,6 +23,16 @@ app.set('views', 'views');
 const displayRoutes = require('./routes/display');
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use((req, res, next) => {
+	const rawCookies = req.headers.cookie || '';
+	req.cookies = rawCookies.split(';').reduce((cookies, cookie) => {
+		const [name, ...rest] = cookie.split('=');
+		if (!name) return cookies;
+		cookies[name.trim()] = decodeURIComponent(rest.join('=').trim());
+		return cookies;
+	}, {});
+	next();
+});
 app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/admin', adminRoutes);

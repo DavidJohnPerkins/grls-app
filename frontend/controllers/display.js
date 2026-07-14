@@ -7,55 +7,80 @@ const { server, db } = require("../config");
 console.log("Server port:", server.port);
 console.log("DB URL:", db.url);
 
-exports.getIndex = (req, res, next) => {
-	Promise.all([
-		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/flags/MOD`),
-		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model`)
-	])
-	.then((arr) => {
+exports.getIndex = async (req, res, next) => {
+	const search_term = req.cookies.search_term || '';
+	let flags = [];
+	try {
+		flags = req.cookies.flags ? JSON.parse(req.cookies.flags) : [];
+	} catch (err) {
+		flags = [];
+	}
+
+	try {
+		const [flag_list, models] = await Promise.all([
+			dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/flags/MOD`),
+			dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model`)
+		]);
+
 		res.render('main-page/model-list', {
-			flag_list: arr[0],
-			models: arr[1],
+			flag_list,
+			models,
+			search_term,
+			flags,
 			pageTitle: 'Model List',
 			path: '/'
 		});
-	})
-	.catch(err => console.log(err));
+	} catch (err) {
+		next(err);
+	}
 };
 
-exports.getFilteredIndex = (req, res, next) => {
-	/*
-	console.log(req.query);
-	if (req.query.search_term === '') {
-		searchTerm = '~';
-	} else 
-	{
-		searchTerm = req.query.search_term;
+exports.getFilteredIndex = async (req, res, next) => {
+	if (req.query.reset) {
+		res.clearCookie('search_term');
+		res.clearCookie('flags');
+		return res.redirect('/');
 	}
-	flags = req.query.flags;*/
-	var searchTerm = req.query.search_term;
-	if (searchTerm === '') {
+
+	let searchTerm = req.query.search_term;
+	if (!searchTerm || searchTerm === '') {
 		searchTerm = '~';
 	}
-	const flags  = JSON.stringify(req.query.flags);
+
+	let flags = req.query.flags || [];
+	if (!Array.isArray(flags)) {
+		flags = [flags];
+	}
+
+	res.cookie('search_term', searchTerm === '~' ? '' : searchTerm, {
+		maxAge: 30 * 24 * 60 * 60 * 1000,
+		sameSite: 'Lax'
+	});
+	res.cookie('flags', JSON.stringify(flags), {
+		maxAge: 30 * 24 * 60 * 60 * 1000,
+		sameSite: 'Lax'
+	});
+
 	const url = new URL(`http://${db.url}:${server.port}/api/grls/modelsearch/${searchTerm}`);
-	url.searchParams.set("flags", flags);
+	url.searchParams.set('flags', JSON.stringify(flags));
 
-		//dbfunc.getData(`http://${db.url}:${server.port}/api/grls/modelsearch/${searchTerm}`)
+	try {
+		const [flag_list, models] = await Promise.all([
+			dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/flags/MOD`),
+			dbfunc.getData(url.toString())
+		]);
 
-	Promise.all([
-		dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/flags/MOD`),
-		dbfunc.getData(url.toString())
-	])
-	.then((arr) => {
 		res.render('main-page/model-list', {
-			flag_list: arr[0],
-			models: arr[1],
+			flag_list,
+			models,
+			search_term: searchTerm === '~' ? '' : searchTerm,
+			flags,
 			pageTitle: 'Model List',
 			path: '/'
 		});
-	})
-	.catch(err => console.log(err));
+	} catch (err) {
+		next(err);
+	}
 };
 
 

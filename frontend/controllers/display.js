@@ -18,7 +18,7 @@ exports.getIndex = async (req, res, next) => {
 
 	try {
 		const [flag_list, models] = await Promise.all([
-			dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/flags/MOD`),
+			dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/flags?type=MOD`),
 			dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model`)
 		]);
 
@@ -61,12 +61,12 @@ exports.getFilteredIndex = async (req, res, next) => {
 		sameSite: 'Lax'
 	});
 
-	const url = new URL(`http://${db.url}:${server.port}/api/grls/modelsearch/${searchTerm}`);
+	const url = new URL(`http://${db.url}:${server.port}/api/grls/modelsearch?term=${searchTerm}`);
 	url.searchParams.set('flags', JSON.stringify(flags));
 
 	try {
 		const [flag_list, models] = await Promise.all([
-			dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/flags/MOD`),
+			dbfunc.getData(`http://${db.url}:${server.port}/api/grls/add/flags?type=MOD`),
 			dbfunc.getData(url.toString())
 		]);
 
@@ -83,14 +83,13 @@ exports.getFilteredIndex = async (req, res, next) => {
 	}
 };
 
-
 exports.getModelByID = async (req, res, next) => {
     try {
         const modelId = req.params.modelId;
 
         const [model, associates] = await Promise.all([
-            dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model/${modelId}`),
-            dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model/associates/${modelId}`)
+            dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model/get?id=${modelId}`),
+            dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model/associates?id=${modelId}`)
         ]);
 
         const imgPath = model.principal_name.substring(0, 1) + "/" + model.principal_name;
@@ -128,7 +127,7 @@ exports.getModelImagesByName = (req, res, next) => {
 exports.getMovieList = (req, res, next) => {
 	const modelId = req.params.modelId;
 	console.log(modelId);
-	dbfunc.getData(`http://${db.url}:${server.port}/api/grls/movies/${modelId}`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/grls/movies?model_id=${modelId}`)
 		.then((rows) => {
 			res.render('main-page/movie-list', {
 				movies: rows,
@@ -142,25 +141,16 @@ exports.getMovieList = (req, res, next) => {
 exports.getContactSheet = (req, res, next) => {
 	imgPath = "/app/images/thumbnail/";
 	
-	var photos = [];
-	fs.readdirSync(imgPath).filter(fn => fn.endsWith('.jpg')).forEach(file => {
-		photos.push(file);
-	})
-	res.render('main-page/model-contact-sheet', {
-		helper: helper,
-		photos: photos,
-		pageTitle: 'Contact Sheet',
-		imagePath: imgPath,
-		path: '/'
-	});
-};
-
-exports.getModelId = (req, res, next) => {
-	dbfunc.getData('http://${db.url}:${server.port}/modelId')
-		.then(([model]) => {
-			const modelId = model.model_id;
-			console.log(modelId);
-			res.redirect(`/model/${modelId}`);
+	const photos = getPhotos(imgPath).filter(fn => fn.endsWith('.jpg'));
+	dbfunc.getData(`http://${db.url}:${server.port}/api/grls/contactsheet?images=${JSON.stringify(photos)}`)
+		.then((rows) => {
+			res.render('main-page/model-contact-sheet', {
+				helper: helper,
+				photos: rows,
+				pageTitle: 'Contact Sheet',
+				imagePath: imgPath,
+				path: '/'
+			});
 		})
 		.catch(err => console.log(err));
 };
@@ -199,3 +189,14 @@ exports.getPlayMovie = (req, res, next) => {
 	}
 };
 
+function getPhotos(imgPath) {
+  const p = [];
+
+  fs.readdirSync(imgPath)
+    .filter(fn => fn.endsWith('.jpg'))
+    .forEach(file => {
+      p.push(file);
+    });
+
+  return p;
+}

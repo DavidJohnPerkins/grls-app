@@ -157,8 +157,9 @@ exports.getContactSheet = (req, res, next) => {
 
 exports.getPlayMovie = (req, res, next) => {
 // Define a route for serving the video file
+	moviePath = "/app/images/movie/";
 	videoTitle = req.params.movieTitle;
-	videoPath = `../../../../Public/movie/${videoTitle}.mp4`;
+	videoPath = `${moviePath}${videoTitle}.mp4`;
 	stat = fs.statSync(videoPath);
 	fileSize = stat.size;
 	range = req.headers.range;

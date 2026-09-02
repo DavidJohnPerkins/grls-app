@@ -84,26 +84,26 @@ exports.getFilteredIndex = async (req, res, next) => {
 };
 
 exports.getModelByID = async (req, res, next) => {
-    try {
-        const modelId = req.params.modelId;
+	try {
+		const modelId = req.params.modelId;
 
-        const [model, associates] = await Promise.all([
-            dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model/get?id=${modelId}`),
-            dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model/associates?id=${modelId}`)
-        ]);
+		const [model, associates] = await Promise.all([
+			dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model/get?id=${modelId}`),
+			dbfunc.getData(`http://${db.url}:${server.port}/api/grls/model/associates?id=${modelId}`)
+		]);
 
-        const imgPath = model.principal_name.substring(0, 1) + "/" + model.principal_name;
+		const imgPath = model.principal_name.substring(0, 1) + "/" + model.principal_name;
 
-        res.render('main-page/model-detail', {
-            model,
-            associates,
-            pageTitle: model.principal_name,
-            imagePath: imgPath,
-            path: '/'
-        });
+		res.render('main-page/model-detail', {
+			model,
+			associates,
+			pageTitle: model.principal_name,
+			imagePath: imgPath,
+			path: '/'
+		});
 
-    } catch (err) {
-        console.error(err);
+	} catch (err) {
+		console.error(err);
 	}
 };
 
@@ -141,7 +141,7 @@ exports.getMovieList = (req, res, next) => {
 exports.getContactSheet = (req, res, next) => {
 	imgPath = "/app/images/thumbnail/";
 	
-	const photos = getPhotos(imgPath).filter(fn => fn.endsWith('.jpg'));
+	const photos = getPhotos(imgPath);
 	dbfunc.getData(`http://${db.url}:${server.port}/api/grls/contactsheet?images=${JSON.stringify(photos)}`)
 		.then((rows) => {
 			res.render('main-page/model-contact-sheet', {
@@ -191,13 +191,13 @@ exports.getPlayMovie = (req, res, next) => {
 };
 
 function getPhotos(imgPath) {
-  const p = [];
+	const p = [];
 
-  fs.readdirSync(imgPath)
-    .filter(fn => fn.endsWith('.jpg'))
-    .forEach(file => {
-      p.push(file);
-    });
+	fs.readdirSync(imgPath)
+		.filter(fn => fn.endsWith('.jpg'))
+		.forEach(file => {
+			p.push(file);
+		});
 
-  return p;
+	return p;
 }
